@@ -11,27 +11,29 @@ import LandingPage from './LandingPage';
 import CreateToy from './ToyStore/CreateToy';
 import EditToy from './ToyStore/EditToy';
 import FilterToy from './ToyStore/FilterToys';
+import RedirectLanding from './utils/RedirectLanding';
+
 
 // Configuramos ruteo.
 const routes = [
     
-    {path:'/category/create', element: CreateCategory},
-    {path:'/category/edit', element:EditCategory},
-    {path:'/category', element: IndexCategory},
+    {path:'/category/create', element : CreateCategory},
+    {path:'/category/edit/:id', element :EditCategory},
+    {path:'/category', element : IndexCategory},
     {path:'/', element: LandingPage},
 
-    {path:'/character/create', element: CreateCharacter},
-    {path:'/character/edit', element:EditCharacter},
-    {path:'/character', element: IndexCharacter},
+    {path:'/character/create', element : CreateCharacter},
+    {path:'/character/edit/:id', element : EditCharacter},
+    {path:'/character', element : IndexCharacter},
 
-    {path:'/brand/create', element: CreateBrand},
-    {path:'/brand/edit', element:EditBrand},
-    {path:'/brand', element: IndexBrand},
+    {path:'/brand/create', element : CreateBrand},
+    {path:'/brand/edit/:id', element : EditBrand},
+    {path:'/brand', element : IndexBrand},
 
-    {path:'/toy/create', element: CreateToy},
-    {path:'/toy/edit', element:EditToy},
-    {path:'/toy/filter', element: FilterToy},
+    {path:'/toy/create', element : CreateToy},
+    {path:'/toy/edit/:id', element : EditToy},
+    {path:'/toy/filter', element : FilterToy},
+    {path:'*', element : RedirectLanding},
 ];
-
 
 export default routes;
