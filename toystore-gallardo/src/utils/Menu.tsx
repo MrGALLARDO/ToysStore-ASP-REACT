@@ -13,6 +13,15 @@ export default function Menu(){
                         <li className="nav-item">
                             <NavLink   className={isActive => "nav-link" + (!isActive ? " unselected" : "") } to="/category">Categoria</NavLink>
                         </li>
+                        <li className="nav-item">
+                            <NavLink   className={isActive => "nav-link" + (!isActive ? " unselected" : "") } to="/toy/filter">Filtrar Juguetes</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink   className={isActive => "nav-link" + (!isActive ? " unselected" : "") } to="/brand">Marcas</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink   className={isActive => "nav-link" + (!isActive ? " unselected" : "") } to="/toy/create">Crear Juguete</NavLink>
+                        </li>
                     </u>
                 </div>
             </div>

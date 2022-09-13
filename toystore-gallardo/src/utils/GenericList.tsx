@@ -18,8 +18,6 @@ export default function GenericList(props: genericList)
     }else {
         return props.children;
     }
-    
-    
 }
 
 interface genericList {

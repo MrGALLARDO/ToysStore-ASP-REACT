@@ -2,6 +2,7 @@ import './App.css';
 import Menu from './utils/Menu';
 import { Routes ,Route, BrowserRouter } from 'react-router-dom';
 import routes from './route-config';
+import path from 'path';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
             {routes.map(({path, element: Component}) => (
               <Route path={path} element={<Component/>} />
             ))}
+
           </Routes>
       </div>
     </BrowserRouter>
