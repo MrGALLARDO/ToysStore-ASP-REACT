@@ -1,27 +1,24 @@
-import './App.css';
-import Menu from './utils/Menu';
-import { Routes ,Route, BrowserRouter } from 'react-router-dom';
-import routes from './route-config';
-import ConfigureValidations from './validations';
+import "./App.css";
+import Menu from "./utils/Menu";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import routes from "./route-config";
+import ConfigureValidations from "./validations";
 
 ConfigureValidations();
 
 function App() {
-
   return (
     <>
       <BrowserRouter>
-        <Menu/>
+        <Menu />
         <div className="container">
           <Routes>
-            {routes.map(({path, element: Component}) => (
-              <Route path={path} element={<Component/>} />
+            {routes.map(({ path, element: Component }) => (
+              <Route path={path} element={<Component />} />
             ))}
-
           </Routes>
-      </div>
-    </BrowserRouter>
-
+        </div>
+      </BrowserRouter>
     </>
   );
 }

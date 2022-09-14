@@ -1,9 +1,7 @@
-export default function ShowErrorField(props: showErrorFieldProps){
-   return (
-   <div className="text-danger">{props.message}</div>
-   )
+export default function ShowErrorField(props: showErrorFieldProps) {
+  return <div className="text-danger">{props.message}</div>;
 }
 
-interface showErrorFieldProps{
-    message: string;
+interface showErrorFieldProps {
+  message: string;
 }
