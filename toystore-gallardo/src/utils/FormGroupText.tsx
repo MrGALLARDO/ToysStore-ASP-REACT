@@ -1,17 +1,15 @@
-import { Form, Field } from "formik"
-import { Link } from "react-router-dom"
-import Button from "./Buttons"
+import { Field, ErrorMessage} from "formik"
+import ShowErrorField from "./ShowErrorField";
 
 export default function FormGroupText(props : formGroupTextProps){
     return(
-        <>xd</>
-        //     <div className="form-group">
-        //         <label htmlFor="nombre">Nombre</label>
-        //         <Field name="nombre" className="form-control"/>
-        //         {errors.nombre && touched.nombre ? (
-        //      <div>{errors.nombre}</div>
-        //    ) : null}
-        //     </div>
+            <div className="form-group">
+                {props.label ? <label htmlFor={props.field}>{props.label}</label> : null}
+                <Field name={props.field} className="form-control" placeHolder={props.placeHolder}/>
+                <ErrorMessage name={props.field}>{message => 
+                    <ShowErrorField message={message}/>
+                }</ErrorMessage>
+            </div>
     )
 }
 
@@ -19,6 +17,4 @@ interface formGroupTextProps{
     field: string;
     label?: string;
     placeHolder?: string;
-    error: string;
-    touch: string;
 }

@@ -1,16 +1,18 @@
 
 import { useNavigate, Link } from "react-router-dom";
 import Button from "../utils/Buttons";
-import { Field,Form,Formik } from "formik";
+import { Form,Formik } from "formik";
 import * as Yup from 'yup';
+import FormGroupText from "../utils/FormGroupText";
 
 export default function CreateCategory(){
     const navigate = useNavigate();
     const RegisterToy = Yup.object().shape({
-        nombre: Yup.string()
+        name: Yup.string()
           .min(3, 'El nombre del producto debe de tener más de 2 caracteres')
           .max(50, 'El nombre del producto debe de tener menos de 50 caracteres')
-          .required('El nombre del producto es requerido'),
+          .required('El nombre del producto es requerido')
+          .firstCapitalLetter(),
         // lastName: Yup.string()
         //   .min(2, 'Too Short!')
         //   .max(50, 'Too Long!')
@@ -22,7 +24,7 @@ export default function CreateCategory(){
         <>
         <h3>Crear Categoria</h3>
         <Formik initialValues={{
-            nombre: ''
+            name: ''
         }}
         validationSchema={RegisterToy}
         onSubmit={values =>{
@@ -30,14 +32,9 @@ export default function CreateCategory(){
         }}
         >
         {({ errors, touched }) => (
+
         <Form>
-            <div className="form-group">
-                <label htmlFor="nombre">Nombre</label>
-                <Field name="nombre" className="form-control"/>
-                {errors.nombre && touched.nombre ? (
-             <div>{errors.nombre}</div>
-           ) : null}
-            </div>
+            <FormGroupText field='name' label="Nombre Juguete" placeHolder="Nombre Juguete"/>
             <Button type="submit">Guardar</Button>
             <Link className="btn btn-secondary" to="/category">Cancelar</Link>
         </Form>
