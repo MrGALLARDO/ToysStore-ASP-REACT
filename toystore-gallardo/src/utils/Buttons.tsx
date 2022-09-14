@@ -1,5 +1,3 @@
-import { boolean } from "yup";
-
 export default function Button(props : buttonProps){
     return(
         <button type={props.type} className="btn btn-primary"
