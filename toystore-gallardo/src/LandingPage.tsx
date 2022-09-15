@@ -38,15 +38,6 @@ export default function LandingPage() {
             precio: 2300,
             image: "https://i.imgur.com/3PfkKB8.png",
           },
-          {
-            id: 4,
-            name: "Chuky4",
-            description: "Muñeco de Chucky.",
-            agerestriction: false,
-            company: "KingGallardo",
-            precio: 2300,
-            image: "https://i.imgur.com/3PfkKB8.png",
-          },
         ],
       });
     }, 500);

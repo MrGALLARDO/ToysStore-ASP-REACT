@@ -9,10 +9,13 @@ import FormGroupDate from "../utils/FormGroupDate";
 export default function FormCharacter(props: formCharacterProps) {
   const RegisterToy = Yup.object().shape({
     name: Yup.string()
-      .min(3, "El nombre del juguete debe de tener más de 2 caracteres")
-      .max(50, "El nombre del juguete debe de tener menos de 50 caracteres")
-      .required("El nombre del juguete es requerido")
+      .min(3, "El nombre del jueguete coleccionable debe de tener más de 2 caracteres.")
+      .max(50, "El nombre del jueguete coleccionable debe de tener menos de 50 caracteres.")
+      .required("El nombre del jueguete coleccionable es requerido.")
       .firstCapitalLetter(),
+    releaseYear: Yup.date()
+    .required('La fecha de lanzamiento del juguete coleccionable es requerida.')
+    .max(new Date().toString(),'La fecha de lanzamiento no debe ser mayor al día de hoy.')
   });
 
   return (
