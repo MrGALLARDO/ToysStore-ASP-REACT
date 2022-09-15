@@ -5,6 +5,7 @@ import FormGroupText from "../utils/FormGroupText";
 import Button from "../utils/Buttons";
 import { Link } from "react-router-dom";
 import FormGroupDate from "../utils/FormGroupDate";
+import FormGroupsImage from "../utils/FormGroupImage";
 
 export default function FormCharacter(props: formCharacterProps) {
   const RegisterToy = Yup.object().shape({
@@ -32,6 +33,7 @@ export default function FormCharacter(props: formCharacterProps) {
             placeholder="Nombre del Juguete Coleccionable"
           />
           <FormGroupDate field="releaseYear" label="Fecha Lanzamiento" />
+          <FormGroupsImage field="img" label="Imagen" imageLink={props.model.imgLink}/>
           <Button
             disabled={isSubmitting || Object.keys(errors).length > 0}
             type="submit"
