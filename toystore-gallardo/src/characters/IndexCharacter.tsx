@@ -4,7 +4,7 @@ export default function IndexCharacter() {
   return (
     <>
       <h3>Index Category</h3>
-      <Link to="character/create">Crear Personaje</Link>
+      <Link to="/character/create">Crear Personaje</Link>
     </>
   );
 }

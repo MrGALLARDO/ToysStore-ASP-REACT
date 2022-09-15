@@ -14,7 +14,7 @@ function App() {
         <div className="container">
           <Routes>
             {routes.map(({ path, element: Component }) => (
-              <Route path={path} element={<Component />} />
+              <Route key={path} path={path} element={<Component />} />
             ))}
           </Routes>
         </div>

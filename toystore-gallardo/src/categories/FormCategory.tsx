@@ -15,8 +15,7 @@ export default function FormCategory(props: formCategoryProps) {
     description: Yup.string()
       .min(3, "El nombre del juguete debe de tener más de 2 caracteres")
       .max(50, "El nombre del juguete debe de tener menos de 50 caracteres")
-      .required("El nombre del juguete es requerido")
-      .firstCapitalLetter(),
+      .required("El nombre del juguete es requerido"),
     // lastName: Yup.string()
     //   .min(2, 'Too Short!')
     //   .max(50, 'Too Long!')
@@ -35,12 +34,12 @@ export default function FormCategory(props: formCategoryProps) {
           <FormGroupText
             field="name"
             label="Nombre Juguete"
-            placeHolder="Nombre Juguete"
+            placeholder="Nombre Juguete"
           />
           <FormGroupText
             field="description"
             label="Descripción del Juguete"
-            placeHolder="Descripción del Juguete"
+            placeholder="Descripción del Juguete"
           />
           <Button
             disabled={isSubmitting || Object.keys(errors).length > 0}

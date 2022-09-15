@@ -1,5 +1,4 @@
 import { Formik, Form, Field } from "formik";
-import { getNodeMajorVersion } from "typescript";
 import { CategoryDTO } from "../categories/category.model";
 import Button from "../utils/Buttons";
 

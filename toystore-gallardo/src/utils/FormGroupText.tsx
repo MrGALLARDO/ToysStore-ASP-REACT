@@ -8,7 +8,7 @@ export default function FormGroupText(props: formGroupTextProps) {
       <Field
         name={props.field}
         className="form-control"
-        placeHolder={props.placeHolder}
+        placeholder={props.placeholder}
       />
       <ErrorMessage name={props.field}>
         {(message) => <ShowErrorField message={message} />}
@@ -20,5 +20,5 @@ export default function FormGroupText(props: formGroupTextProps) {
 interface formGroupTextProps {
   field: string;
   label?: string;
-  placeHolder?: string;
+  placeholder?: string;
 }

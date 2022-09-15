@@ -4,12 +4,10 @@ export default function Menu() {
   // const activeClass = "active";
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid">
         <NavLink
-          className={(isActive) =>
-            "navbar-brand" + (!isActive ? " unselected" : "")
-          }
+                className= "navbar-brand" 
           to="/"
         >
           React ToysStore
@@ -18,8 +16,8 @@ export default function Menu() {
           <u className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <NavLink
-                className={(isActive) =>
-                  "nav-link" + (!isActive ? " unselected" : "")
+                className={({ isActive }) =>
+                  "nav-link" + (isActive ? " active" : " inactive")
                 }
                 to="/category"
               >
@@ -28,8 +26,8 @@ export default function Menu() {
             </li>
             <li className="nav-item">
               <NavLink
-                className={(isActive) =>
-                  "nav-link" + (!isActive ? " unselected" : "")
+                className={({ isActive }) =>
+                  "nav-link" + (isActive ? " active" : " inactive")
                 }
                 to="/toy/filter"
               >
@@ -38,8 +36,19 @@ export default function Menu() {
             </li>
             <li className="nav-item">
               <NavLink
-                className={(isActive) =>
-                  "nav-link" + (!isActive ? " unselected" : "")
+                className={({ isActive }) =>
+                  "nav-link" + (isActive ? " active" : " inactive")
+                }
+                to="/character"
+              >
+                Personajes Coleccionables
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) =>
+                  "nav-link" + (isActive ? " active" : " inactive")
                 }
                 to="/brand"
               >
@@ -48,8 +57,8 @@ export default function Menu() {
             </li>
             <li className="nav-item">
               <NavLink
-                className={(isActive) =>
-                  "nav-link" + (!isActive ? " unselected" : "")
+                className={({ isActive }) =>
+                  "nav-link" + (isActive ? " active" : " inactive")
                 }
                 to="/toy/create"
               >
