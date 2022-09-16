@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import Button from "../utils/Buttons";
 import FormGroupText from "../utils/FormGroupText";
 import { Link } from "react-router-dom";
+import MapLeaflet from "../utils/Map";
 
 export default function FormBranches(props: formBranchProps) {
   const schemaBranches = Yup.object().shape({
@@ -24,6 +25,10 @@ export default function FormBranches(props: formBranchProps) {
         return (
           <Form>
             <FormGroupText label="Nombre" field="name" />
+            <div style={{marginBottom: '1rem'}}>
+                <MapLeaflet/>
+            </div>
+
             <Button disabled={isSubmitting || Object.keys(errors).length > 0} type="submit">Guardar</Button>
             <Link className="btn btn-secondary" to="/brand">
               Cancelar
