@@ -1,6 +1,6 @@
-import CreateBrand from './brands/CreateBrand';
-import EditBrand from './brands/EditBrands';
-import IndexBrand from './brands/IndexBrand';
+import CreateBrand from './branch/CreateBranch';
+import EditBrand from './branch/EditBranch';
+import IndexBrand from './branch/IndexBranch';
 import CreateCategory from './categories/CreateCategory';
 import EditCategory from './categories/EditCategory';
 import IndexCategory from './categories/IndexCategory';
@@ -26,9 +26,9 @@ const routes = [
     {path:'/character/edit/:id', element : EditCharacter},
     {path:'/character', element : IndexCharacter},
 
-    {path:'/brand/create', element : CreateBrand},
-    {path:'/brand/edit/:id', element : EditBrand},
-    {path:'/brand', element : IndexBrand},
+    {path:'/branch/create', element : CreateBrand},
+    {path:'/branch/edit/:id', element : EditBrand},
+    {path:'/branch', element : IndexBrand},
 
     {path:'/toy/create', element : CreateToy},
     {path:'/toy/edit/:id', element : EditToy},

@@ -5,8 +5,11 @@ export default function CreateCharacter() {
     <>
       <h3>Crear Personajes</h3>
       <FormCharacter
-        model={{ name: "", releaseYear: undefined! }}
-        onSubmit={(values) => console.log(values)}
+        model={{ name: "", releaseYear: undefined!, description: "" }}
+        onSubmit={async (values) => {
+          await new Promise((r) => setTimeout(r, 3000));
+          console.log(values);
+        }}
       />
     </>
   );

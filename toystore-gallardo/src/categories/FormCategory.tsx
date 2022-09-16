@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { CategoryCreationDTO } from "./category.model";
 
 export default function FormCategory(props: formCategoryProps) {
-  const RegisterToy = Yup.object().shape({
+  const schemaCategory = Yup.object().shape({
     name: Yup.string()
       .min(3, "El nombre del juguete debe de tener más de 2 caracteres")
       .max(50, "El nombre del juguete debe de tener menos de 50 caracteres")
@@ -16,17 +16,12 @@ export default function FormCategory(props: formCategoryProps) {
       .min(3, "El nombre del juguete debe de tener más de 2 caracteres")
       .max(50, "El nombre del juguete debe de tener menos de 50 caracteres")
       .required("El nombre del juguete es requerido"),
-    // lastName: Yup.string()
-    //   .min(2, 'Too Short!')
-    //   .max(50, 'Too Long!')
-    //   .required('Required'),
-    // email: Yup.string().email('Invalid email').required('Required'),
   });
 
   return (
     <Formik
       initialValues={props.model}
-      validationSchema={RegisterToy}
+      validationSchema={schemaCategory}
       onSubmit={props.onSubmit}
     >
       {({ errors, isSubmitting }) => (

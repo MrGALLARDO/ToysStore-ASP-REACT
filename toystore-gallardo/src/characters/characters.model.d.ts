@@ -3,4 +3,5 @@ export interface characterCreationDTO{
     releaseYear: Date;
     img?: File;
     imgLink?: string;
+    description?: string;
 }

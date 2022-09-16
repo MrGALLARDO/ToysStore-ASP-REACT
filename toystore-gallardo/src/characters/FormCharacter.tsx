@@ -6,6 +6,7 @@ import Button from "../utils/Buttons";
 import { Link } from "react-router-dom";
 import FormGroupDate from "../utils/FormGroupDate";
 import FormGroupsImage from "../utils/FormGroupImage";
+import FormGroupMarkdown from './../utils/FormGroupMarkdown';
 
 export default function FormCharacter(props: formCharacterProps) {
   const RegisterToy = Yup.object().shape({
@@ -34,6 +35,7 @@ export default function FormCharacter(props: formCharacterProps) {
           />
           <FormGroupDate field="releaseYear" label="Fecha Lanzamiento" />
           <FormGroupsImage field="img" label="Imagen" imageLink={props.model.imgLink}/>
+          <FormGroupMarkdown field="description" label="Descripción"/>
           <Button
             disabled={isSubmitting || Object.keys(errors).length > 0}
             type="submit"

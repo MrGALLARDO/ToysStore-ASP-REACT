@@ -50,9 +50,9 @@ export default function Menu() {
                 className={({ isActive }) =>
                   "nav-link" + (isActive ? " active" : " inactive")
                 }
-                to="/brand"
+                to="/branch"
               >
-                Marcas
+                Sucursales
               </NavLink>
             </li>
             <li className="nav-item">

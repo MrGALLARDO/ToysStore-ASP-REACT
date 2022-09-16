@@ -1,8 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import FormCategory from "./FormCategory";
 
 export default function CreateCategory() {
-  const navigate = useNavigate();
 
   return (
     <>

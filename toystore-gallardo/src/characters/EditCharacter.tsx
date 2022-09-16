@@ -5,7 +5,7 @@ export default function EditCharacter() {
     <>
       <h3>Editar Personaje</h3>
       <FormCharacter
-        model={{ name: "", releaseYear: undefined! }}
+        model={{ name: "", releaseYear: undefined!, imgLink:''}}
         onSubmit={(values) => console.log(values)}
       />
     </>
