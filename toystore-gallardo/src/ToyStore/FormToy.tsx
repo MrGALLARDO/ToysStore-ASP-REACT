@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { CategoryDTO } from "../categories/category.model";
 import { useState } from "react";
 import SelectorMultiple, { selectorMultipleModel } from "../utils/SelectorMultiple";
+import { branchDTO } from "../branch/branch.models";
 
 export default function FormToys(props: FormToyProps) {
     
@@ -29,10 +30,10 @@ export default function FormToys(props: FormToyProps) {
     const [categoriesSelected, setCategoriesSelected] = useState(mapped(props.categoriesSelected));
     const [categoriesNotSelected, setCategoriesNotSelected] = useState(mapped(props.categoriesNotSelected));
 
-    // const [branchesSelected, setBranchesSelected] =
-    // useState(mapped(props.branchesSelected));
-    // const [branchesNotSelected, seBranchesNotSelected] =
-    // useState(mapped(props.branchesNotSelected));
+    const [branchesSelected, setBranchesSelected] =
+    useState(mapped(props.branchesSelected));
+    const [branchesNotSelected, setBranchesNotSelected] =
+    useState(mapped(props.branchesNotSelected));
 
     // const [actoresSeleccionados, setActoresSeleccionados] = 
     // useState<actorPeliculaDTO[]>(props.actoresSeleccionados)
@@ -47,7 +48,8 @@ export default function FormToys(props: FormToyProps) {
         <Formik
             initialValues={props.model}
             onSubmit={(values, actions) =>{
-            values.categoriesId = categoriesSelected.map(value => value.key);
+            values.categoriesIds = categoriesSelected.map(value => value.key);
+            values.branchesIds = branchesSelected.map(value => value.key);
              props.onSubmit(values,actions);
             }}
             validationSchema={schemaToys}
@@ -68,12 +70,24 @@ export default function FormToys(props: FormToyProps) {
                     />
                    
                    <div className="form-group">
-                        <label>Sucursales:</label>
+                        <label>Categoria:</label>
                         <SelectorMultiple selected={categoriesSelected}
                             notSelected={categoriesNotSelected}
                             onChange={(selected, notSelected) => {
                                 setCategoriesSelected(selected)
                                 setCategoriesNotSelected(notSelected);
+                            }}
+                        />
+                    </div>
+
+                           
+                   <div className="form-group">
+                        <label>Sucursales:</label>
+                        <SelectorMultiple selected={branchesSelected}
+                            notSelected={branchesNotSelected}
+                            onChange={(selected, notSelected) => {
+                                setBranchesSelected(selected)
+                                setBranchesNotSelected(notSelected);
                             }}
                         />
                     </div>
@@ -129,7 +143,7 @@ interface FormToyProps {
     ): void;
     categoriesSelected: CategoryDTO[];
     categoriesNotSelected: CategoryDTO[];
-    // branchesSelected: branchDTO[];
-    // branchesNotSelected: cineDTO[];
+    branchesSelected: branchDTO[];
+    branchesNotSelected: branchDTO[];
     // actoresSeleccionados: actorPeliculaDTO[];
 }

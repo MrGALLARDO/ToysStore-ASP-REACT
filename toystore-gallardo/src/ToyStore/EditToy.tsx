@@ -9,7 +9,7 @@ export default function EditToy() {
           name: 'test', atSucursal: true, description: 'test',
           releaseDate: new Date('2019-01-01T00:00:00')
         }}
-        onSubmit={valores => console.log(valores)} categoriesSelected={[]} categoriesNotSelected={[]}      />
+        onSubmit={valores => console.log(valores)} categoriesSelected={[]} categoriesNotSelected={[]} branchesSelected={[]} branchesNotSelected={[]}      />
     </>
   );
 }

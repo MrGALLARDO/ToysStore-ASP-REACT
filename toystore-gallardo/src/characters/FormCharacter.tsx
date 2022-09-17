@@ -34,7 +34,7 @@ export default function FormCharacter(props: formCharacterProps) {
             placeholder="Nombre del Juguete Coleccionable"
           />
           <FormGroupDate field="releaseYear" label="Fecha Lanzamiento" />
-          <FormGroupsImage field="img" label="Imagen" imageLink={props.model.imgLink} />
+          <FormGroupsImage field="image" label="Imagen" imageLink={props.model.imageLink} />
           <FormGroupMarkdown field="description" label="Descripción" />
           <Button
             disabled={isSubmitting || Object.keys(errors).length > 0}
