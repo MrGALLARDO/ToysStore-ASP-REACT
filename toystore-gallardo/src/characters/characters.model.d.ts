@@ -1,4 +1,4 @@
-export interface characterCreationDTO{
+export interface characterCreationDTO {
     name: string
     releaseYear: Date;
     img?: File;

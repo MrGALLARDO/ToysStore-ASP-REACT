@@ -7,7 +7,7 @@ export default function Menu() {
     <nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid">
         <NavLink
-                className= "navbar-brand" 
+          className="navbar-brand"
           to="/"
         >
           React ToysStore

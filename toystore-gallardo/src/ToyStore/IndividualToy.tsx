@@ -8,11 +8,11 @@ export default function IndividualToy(props: individualToyProps) {
   return (
     <div className={css.div}>
       <a href={buildLink()}>
-      <img src={props.toy.image} alt="Imagen" />
+        <img src={props.toy.image} alt="Imagen" />
       </a>
       <p>
         <a href={buildLink()}>{props.toy.name}</a>
-      </p> 
+      </p>
     </div>
   );
 }

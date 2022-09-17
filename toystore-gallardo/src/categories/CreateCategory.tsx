@@ -1,7 +1,6 @@
 import FormCategory from "./FormCategory";
 
 export default function CreateCategory() {
-
   return (
     <>
       <h3>Crear Categoria</h3>

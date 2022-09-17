@@ -8,14 +8,14 @@ import { CategoryCreationDTO } from "./category.model";
 export default function FormCategory(props: formCategoryProps) {
   const schemaCategory = Yup.object().shape({
     name: Yup.string()
-      .min(3, "El nombre del juguete debe de tener más de 2 caracteres")
-      .max(50, "El nombre del juguete debe de tener menos de 50 caracteres")
-      .required("El nombre del juguete es requerido")
+      .min(3, "El nombre de la categoria debe de tener más de 2 caracteres")
+      .max(50, "El nombre de la categoria debe de tener menos de 50 caracteres")
+      .required("El nombre de la categoria es requerido")
       .firstCapitalLetter(),
     description: Yup.string()
       .min(3, "El nombre del juguete debe de tener más de 2 caracteres")
-      .max(50, "El nombre del juguete debe de tener menos de 50 caracteres")
-      .required("El nombre del juguete es requerido"),
+      .max(50, "El nombre de la categoria debe de tener menos de 50 caracteres")
+      .required("El nombre de la categoria es requerido"),
   });
 
   return (
@@ -28,13 +28,13 @@ export default function FormCategory(props: formCategoryProps) {
         <Form>
           <FormGroupText
             field="name"
-            label="Nombre Juguete"
-            placeholder="Nombre Juguete"
+            label="Nombre la categoria"
+            placeholder="Nombre categoria"
           />
           <FormGroupText
             field="description"
-            label="Descripción del Juguete"
-            placeholder="Descripción del Juguete"
+            label="Descripción de la categoria"
+            placeholder="Descripción de la categoria"
           />
           <Button
             disabled={isSubmitting || Object.keys(errors).length > 0}

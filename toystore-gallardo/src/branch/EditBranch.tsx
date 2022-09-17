@@ -1,15 +1,16 @@
-import FormBranches from "./FormBranch";
+import FormBranch from "./FormBranch";
 
 export default function EditBrand() {
   return (
     <>
       <h3>Editar Marca</h3>
-      <FormBranches
-        model={{ name: "" }}
-        onSubmit={async (values) => {
-            await new Promise((r) => setTimeout(r, 3000));
-            console.log(values);
-          }}
+      <FormBranch
+        model={{
+          name: "",
+          latitude: 20.673467098990216,
+          longitude: -103.36767228914579,
+        }}
+        onSubmit={(values) => console.log(values)}
       />
     </>
   );

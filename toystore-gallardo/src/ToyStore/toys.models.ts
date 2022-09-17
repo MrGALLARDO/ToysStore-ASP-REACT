@@ -5,8 +5,17 @@ export interface toy {
   description: string;
   agerestriction: boolean;
   company: string;
-  precio: number;
+  price: number;
   image: string;
+}
+
+export interface toyCreationDTO {
+  name: string;
+  atSucursal: boolean;
+  description: string;
+  releaseDate?: Date;
+  image?: File;
+  imageLink?: string;
 }
 
 // Interfaz de estado.

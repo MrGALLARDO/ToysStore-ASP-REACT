@@ -16,8 +16,8 @@ export default function FormCharacter(props: formCharacterProps) {
       .required("El nombre del jueguete coleccionable es requerido.")
       .firstCapitalLetter(),
     releaseYear: Yup.date()
-    .required('La fecha de lanzamiento del juguete coleccionable es requerida.')
-    .max(new Date().toString(),'La fecha de lanzamiento no debe ser mayor al día de hoy.')
+      .required('La fecha de lanzamiento del juguete coleccionable es requerida.')
+      .max(new Date().toString(), 'La fecha de lanzamiento no debe ser mayor al día de hoy.')
   });
 
   return (
@@ -34,8 +34,8 @@ export default function FormCharacter(props: formCharacterProps) {
             placeholder="Nombre del Juguete Coleccionable"
           />
           <FormGroupDate field="releaseYear" label="Fecha Lanzamiento" />
-          <FormGroupsImage field="img" label="Imagen" imageLink={props.model.imgLink}/>
-          <FormGroupMarkdown field="description" label="Descripción"/>
+          <FormGroupsImage field="img" label="Imagen" imageLink={props.model.imgLink} />
+          <FormGroupMarkdown field="description" label="Descripción" />
           <Button
             disabled={isSubmitting || Object.keys(errors).length > 0}
             type="submit"

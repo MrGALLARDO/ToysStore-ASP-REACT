@@ -1,16 +1,16 @@
 import { Field, useFormikContext } from "formik";
 import ReactMarkdown from "react-markdown";
 import './FormGroupMarkdown.css'
-export default function FormGroupMarkdown(props: FormGroupMarkdownProps ){
+export default function FormGroupMarkdown(props: FormGroupMarkdownProps) {
 
-    const {values} = useFormikContext<any>();
+    const { values } = useFormikContext<any>();
 
     return (
         <div className="form-group form-markdown">
             <div>
                 <label>{props.label}</label>
                 <div>
-                    <Field name={props.field} as ="textarea" className="form-textarea"/>
+                    <Field name={props.field} as="textarea" className="form-textarea" />
                 </div>
             </div>
             <div>
@@ -23,7 +23,7 @@ export default function FormGroupMarkdown(props: FormGroupMarkdownProps ){
     )
 }
 
-interface FormGroupMarkdownProps{
+interface FormGroupMarkdownProps {
     field: string;
     label: string;
 }
