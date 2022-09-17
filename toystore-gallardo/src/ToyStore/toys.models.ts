@@ -16,6 +16,7 @@ export interface toyCreationDTO {
   releaseDate?: Date;
   image?: File;
   imageLink?: string;
+  categoriesId?: number[];
 }
 
 // Interfaz de estado.
