@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Data;
 using ToysStore.Controllers.Entities;
 using ToysStore.DTOs;
+using ToysStore.Utils;
 
 namespace ToysStore.Controllers
 {
@@ -30,9 +31,11 @@ namespace ToysStore.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<CategoryDTO>>> Get()
+        public async Task<ActionResult<List<CategoryDTO>>> Get([FromQuery] PaginationDTO paginationDTO)
         {
-            List<Category> categories = await context.categories.ToListAsync();
+            var queryable = context.categories.AsQueryable();
+            await HttpContext.InsertParameterPaginationInHeader(queryable);
+            var categories = await queryable.OrderBy(x => x.Name).Paginate(paginationDTO).ToListAsync();
             return mapper.Map<List<CategoryDTO>>(categories);
         }
 
