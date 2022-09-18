@@ -1,3 +1,5 @@
+import { characterToyDTO } from "../characters/characters.model";
+
 // Modelo de interface del Juguete.
 export interface toy {
   id: number;
@@ -18,6 +20,7 @@ export interface toyCreationDTO {
   imageLink?: string;
   categoriesIds?: number[];
   branchesIds?: number[];
+  characters?: characterToyDTO[];
 }
 
 // Interfaz de estado.
