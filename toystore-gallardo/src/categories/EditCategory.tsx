@@ -8,7 +8,7 @@ export default function EditCategory() {
     <>
       <h3>Editar Categoria</h3>
       <FormCategory
-        model={{ name: "", description: "" }}
+        model={{ name: ""}}
         onSubmit={async (values) => {
           await new Promise((r) => setTimeout(r, 3000));
           console.log(values);

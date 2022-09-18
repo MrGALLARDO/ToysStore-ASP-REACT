@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using ToysStore;
+using ToysStore.ApiBehavior;
 using ToysStore.Controllers.Filters;
+using ToysStore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +15,13 @@ builder.Services.AddResponseCaching();
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add(typeof(FilterException));
-});
+    options.Filters.Add(typeof(ParseBadRequest));
+}).ConfigureApiBehaviorOptions(BehaviorBadRequest.Parsing);
+
+builder.Services.AddAutoMapper(typeof(Program));
+
+builder.Services.AddDbContext<AplicationDbContext>(options =>
+ options.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnection")));
 
 builder.Services.AddCors(options =>
 {

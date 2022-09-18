@@ -7,7 +7,7 @@ import { CategoryDTO } from "./category.model";
 export default function IndexCategory() {
   
   useEffect(()=>{
-    axios.get('https://localhost:7256/api/category')
+    axios.get(urlCategories)
     .then((answer: AxiosResponse<CategoryDTO[]>) =>{
       console.log(answer.data);
     })
@@ -16,7 +16,7 @@ export default function IndexCategory() {
   return (
     <>
       <h3>Categoria</h3>
-      <Link to="/category/create">Crear Categoria</Link>
+      <Link className="btn btn-primary" to="/category/create">Crear Categoria</Link>
     </>
   );
 }

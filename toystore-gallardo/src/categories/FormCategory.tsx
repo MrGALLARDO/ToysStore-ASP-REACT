@@ -12,10 +12,6 @@ export default function FormCategory(props: formCategoryProps) {
       .max(50, "El nombre de la categoria debe de tener menos de 50 caracteres")
       .required("El nombre de la categoria es requerido")
       .firstCapitalLetter(),
-    description: Yup.string()
-      .min(3, "El nombre del juguete debe de tener más de 2 caracteres")
-      .max(50, "El nombre de la categoria debe de tener menos de 50 caracteres")
-      .required("El nombre de la categoria es requerido"),
   });
 
   return (
@@ -30,11 +26,6 @@ export default function FormCategory(props: formCategoryProps) {
             field="name"
             label="Nombre la categoria"
             placeholder="Nombre categoria"
-          />
-          <FormGroupText
-            field="description"
-            label="Descripción de la categoria"
-            placeholder="Descripción de la categoria"
           />
           <Button
             disabled={isSubmitting || Object.keys(errors).length > 0}

@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 using System.Data;
 using ToysStore.Controllers.Entities;
+using ToysStore.DTOs;
 
 namespace ToysStore.Controllers
 {
@@ -14,16 +17,23 @@ namespace ToysStore.Controllers
     {
 
         private readonly ILogger<CategoryController> logger;
+        private readonly AplicationDbContext context;
+        private readonly IMapper mapper;
 
-        public CategoryController(ILogger<CategoryController> logger)
+        public CategoryController(ILogger<CategoryController> logger,
+            AplicationDbContext context,
+            IMapper mapper)
         {
             this.logger = logger;
+            this.context = context;
+            this.mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult<List<Category>> Get()
+        public async Task<ActionResult<List<CategoryDTO>>> Get()
         {
-            return new List<Category>() { new Category() { Id = 1, Name = "RobertoG" } };
+            List<Category> categories = await context.categories.ToListAsync();
+            return mapper.Map<List<CategoryDTO>>(categories);
         }
 
         [HttpGet("{Id:int}/")]
@@ -33,10 +43,14 @@ namespace ToysStore.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] Category category)
+        public async Task<ActionResult> Post([FromBody] CategoryCreationDTO categoryCreationDTO)
         {
-            throw new NotImplementedException();
+            var category = mapper.Map<Category>(categoryCreationDTO);
+            context.Add(category);
+            await context.SaveChangesAsync();
+            return NoContent();
         }
+
         [HttpPut]
         public ActionResult Put([FromBody] Category category)
         {
