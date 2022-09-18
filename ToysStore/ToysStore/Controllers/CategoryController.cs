@@ -20,7 +20,6 @@ namespace ToysStore.Controllers
             this.logger = logger;
         }
 
-
         [HttpGet]
         public ActionResult<List<Category>> Get()
         {
