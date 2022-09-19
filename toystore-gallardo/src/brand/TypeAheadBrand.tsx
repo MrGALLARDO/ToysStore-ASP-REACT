@@ -1,41 +1,33 @@
+import axios, { AxiosResponse } from "axios";
 import { useState } from "react";
-import { Typeahead } from "react-bootstrap-typeahead";
+import { AsyncTypeahead} from "react-bootstrap-typeahead";
 import { ReactElement } from "react-markdown/lib/react-markdown";
+import { urlBrands } from "../endpoints";
 import { brandToyDTO } from "./brands.model";
 
 export default function TypeAheadbrand(props: typeAheadbrandProps) {
-  const brands: brandToyDTO[] = [
-    {
-      id: 1,
-      name: "Felipe",
-      website: "",
-      image:
-        "https://m.media-amazon.com/images/M/MV5BNzZiNTEyNTItYjNhMS00YjI2LWIwMWQtZmYwYTRlNjMyZTJjXkEyXkFqcGdeQXVyMTExNzQzMDE0._V1_UX214_CR0,0,214,317_AL_.jpg",
-    },
-    {
-      id: 2,
-      name: "Fernando",
-      website: "",
-      image:
-        "https://m.media-amazon.com/images/M/MV5BMTQ1NTQwMTYxNl5BMl5BanBnXkFtZTYwMjA1MzY1._V1_UX214_CR0,0,214,317_AL_.jpg",
-    },
-    {
-      id: 3,
-      name: "Roberto",
-      website: "",
-      image:
-        "https://m.media-amazon.com/images/M/MV5BMjI0MTg3MzI0M15BMl5BanBnXkFtZTcwMzQyODU2Mw@@._V1_UY317_CR10,0,214,317_AL_.jpg",
-    },
-  ];
+  
+  const [options, setOptions] = useState<brandToyDTO[]>([]);
 
   const selection: brandToyDTO[] = [];
 
   const [elementDragged, setElementDragged] = 
   useState<brandToyDTO | undefined>(undefined)
 
+  const [isLoading, setIsLoading] = useState(false);
+
   function manageDragStart(brand: brandToyDTO) 
   {
       setElementDragged(brand);
+  }
+
+  function manageFind(query:string){
+    setIsLoading(true);
+    axios.get(`${urlBrands}/findByName/${query}`)
+    .then((answer: AxiosResponse<brandToyDTO[]>) =>{
+      setOptions(answer.data);
+      setIsLoading(false);
+    })
   }
 
   function manageDragOver(brand: brandToyDTO)
@@ -60,8 +52,8 @@ export default function TypeAheadbrand(props: typeAheadbrandProps) {
 
   return (
     <>
-      <label>Personajes</label>
-      <Typeahead
+      <label>Marcas</label>
+      <AsyncTypeahead
         id="typeahead"
         onChange={(brands) => {
           if (
@@ -70,9 +62,11 @@ export default function TypeAheadbrand(props: typeAheadbrandProps) {
             props.onAdd([...props.brands, brands[0]]);
           }
         }}
-        options={brands}
+        options={options}
         labelKey={(brands) => brands.name}
-        filterBy={["name"]}
+        filterBy={() => true}
+        isLoading={isLoading}
+        onSearch={manageFind}
         placeholder={"Escriba el nombre de la Marca"}
         minLength={1}
         flip={true}

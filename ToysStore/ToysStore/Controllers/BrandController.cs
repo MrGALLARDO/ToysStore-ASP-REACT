@@ -47,6 +47,19 @@ namespace ToysStore.Controllers
             return mapper.Map<BrandDTO>(brand);
         }
 
+        [HttpGet("findByName/{name}")]
+        public async Task<List<ToyBrandDTO>> findByName(string name = "")
+        {
+            if (string.IsNullOrEmpty(name)) { return new List<ToyBrandDTO>(); }
+
+            return await context.brands
+                .Where(x => x.Name.Contains(name))
+                .OrderBy(x => x.Name)
+                .Select(x => new ToyBrandDTO { Id = x.Id, Name = x.Name , Image = x.Image})
+                .Take(5)
+                .ToListAsync();
+        }
+
         [HttpPost]
         public async Task<ActionResult> Post([FromForm] BrandCreationDTO brandCreationDTO)
         {
