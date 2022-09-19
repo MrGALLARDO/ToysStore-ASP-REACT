@@ -19,6 +19,10 @@ namespace ToysStore.Utils
             CreateMap<BranchCreationDTO, Branch>()
                 .ForMember(x => x.ubication, x => x.MapFrom(dto =>
                 geometryFactory.CreatePoint(new Coordinate(dto.Longitude, dto.Latitude))));
+
+            CreateMap<Branch, BranchDTO>()
+                .ForMember(x => x.Latitude, dto => dto.MapFrom(field => field.ubication.Y))
+                .ForMember(x => x.Longitude, dto => dto.MapFrom(field => field.ubication.X));
         }
     }
 }

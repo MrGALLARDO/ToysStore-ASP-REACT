@@ -1,11 +1,39 @@
-import { Link } from "react-router-dom";
+import { urlBranch } from "../endpoints";
+import IndexEntity from "../utils/IndexEntity";
+import { branchDTO } from "./branch.models";
 
 export default function IndexBranch() {
   return (
     <>
-      <h3>Sucursales</h3>
-      <Link to="/branch/create">Crear Sucursal</Link>
-      
+      <IndexEntity<branchDTO>
+        url={urlBranch}
+        urlCreate="/branch/create"
+        title="Sucursales"
+        nameEntity="Sucursal"
+      >
+        {(branches, buttons) =>
+          <>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Nombre</th>
+              </tr>
+            </thead>
+            <tbody>
+              {branches?.map(branch =>
+                <tr key={branch.id}>
+                  <td>
+                    {buttons(`/branch/edit/${branch.id}`, branch.id)}
+                  </td>
+                  <td>
+                    {branch.name}
+                  </td>
+                </tr>)}
+            </tbody>
+          </>
+        }
+
+      </IndexEntity>
     </>
   );
 }

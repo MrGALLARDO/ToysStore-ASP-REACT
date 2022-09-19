@@ -51,7 +51,7 @@ export default function FormBranches(props: formBranchProps) {
             >
               Guardar
             </Button>
-            <Link className="btn btn-secondary" to="/brand">
+            <Link className="btn btn-secondary" to="/branch">
               Cancelar
             </Link>
           </Form>
