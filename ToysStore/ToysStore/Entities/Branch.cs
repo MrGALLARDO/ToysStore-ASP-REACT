@@ -10,6 +10,8 @@ namespace ToysStore.Entities
         [Required]
         [StringLength(maximumLength: 100)]
         public string Name { get; set; }
-        public Point ubication { get; set; }
+        public Point Ubication { get; set; }
+
+        public List<ToysBranches> ToysBranches { get; set; }
     }
 }

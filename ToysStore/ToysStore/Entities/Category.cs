@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using ToysStore.Entities;
 using ToysStore.Validations;
 
 namespace ToysStore.Controllers.Entities
@@ -11,5 +12,7 @@ namespace ToysStore.Controllers.Entities
         [StringLength(maximumLength:50)]
         [FirstCapitalLetter]
         public string Name { get; set; }
+
+        public List<ToysCategories> ToysCategories { get; set; }
     }
 }

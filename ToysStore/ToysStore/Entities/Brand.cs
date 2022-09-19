@@ -15,5 +15,7 @@ namespace ToysStore.Entities
         public DateTime ReleaseYear { get; set; }
 
         public string Image { get; set; }
+
+        public List<ToysBrands> ToysBrands { get; set; }
     }
 }
