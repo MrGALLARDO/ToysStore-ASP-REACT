@@ -1,4 +1,4 @@
-import { urlBranch } from "../endpoints";
+import { urlBranches } from "../endpoints";
 import EditEntity from "../utils/EditEntity";
 import { branchCreationDTO, branchDTO } from "./branch.models";
 import FormBranch from "./FormBranch";
@@ -6,7 +6,7 @@ import FormBranch from "./FormBranch";
 export default function EditBranch() {
   return (
       <EditEntity<branchCreationDTO, branchDTO>
-        url={urlBranch}
+        url={urlBranches}
         urlIndex="/branch"
         nameEntity="Sucursales"
       >

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ToysStore.Controllers.Entities;
 using ToysStore.DTOs;
 using ToysStore.Utils;
@@ -40,6 +41,19 @@ namespace ToysStore.Controllers
             await context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        [HttpGet("PostGet")] 
+        public async Task<ActionResult<ToyPostGetDTO>> PostGet()
+        {
+            var branches = await context.branches.ToListAsync();
+            var categories = await context.categories.ToListAsync();
+
+            var branchDTO = mapper.Map<List<BranchDTO>>(branches);
+            var categoryDTO = mapper.Map<List<CategoryDTO>>(categories);
+
+            return new ToyPostGetDTO() { Branches = branchDTO, Categories = categoryDTO };
+
         }
 
         private void OrderBrands(Toy toy)

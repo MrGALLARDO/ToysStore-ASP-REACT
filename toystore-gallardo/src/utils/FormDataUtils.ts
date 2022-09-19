@@ -1,4 +1,5 @@
 import { brandCreationDTO } from "../brand/brands.model";
+import { toyCreationDTO } from "../ToyStore/toys.models";
 
 
 export function convertBrandToFormData(brand: brandCreationDTO): FormData{
@@ -20,31 +21,31 @@ export function convertBrandToFormData(brand: brandCreationDTO): FormData{
     return formData;
 }
 
-// export function convertirPeliculaAFormData(pelicula: peliculaCreacionDTO): FormData {
-//     const formData = new FormData();
+export function convertToyToFormData(toy: toyCreationDTO): FormData {
+    const formData = new FormData();
 
-//     formData.append('titulo', pelicula.titulo);
+    formData.append('name', toy.name);
 
-//     if (pelicula.resumen){
-//         formData.append('resumen', pelicula.resumen);
-//     }
+    // if (toy.resumen){
+    //     formData.append('resumen', toy.resumen);
+    // }
 
-//     formData.append('trailer', pelicula.trailer);
-//     formData.append('enCines', String(pelicula.enCines));
-//     if (pelicula.fechaLanzamiento){
-//         formData.append("fechaLanzamiento", formatearFecha(pelicula.fechaLanzamiento));
-//     }
+    formData.append('description', toy.description);
+    formData.append('inStock', String(toy.inStock));
+    if (toy.releaseDate){
+        formData.append("registerDate", formatDate(toy.releaseDate));
+    }
 
-//     if (pelicula.poster){
-//         formData.append('poster', pelicula.poster);
-//     }
+    if (toy.image){
+        formData.append('image', toy.image);
+    }
 
-//     formData.append("generosIds", JSON.stringify(pelicula.generosIds));
-//     formData.append("cinesIds", JSON.stringify(pelicula.cinesIds));
-//     formData.append("actores", JSON.stringify(pelicula.actores));
+    formData.append("categoriesIds", JSON.stringify(toy.categoriesIds));
+    formData.append("branchesIds", JSON.stringify(toy.branchesIds));
+    formData.append("brands", JSON.stringify(toy.brands));
 
-//     return formData;
-// }
+    return formData;
+}
 
 function formatDate(date: Date){
     date = new Date(date);

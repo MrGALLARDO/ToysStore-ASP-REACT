@@ -6,7 +6,7 @@ using ToysStore.Entities;
 
 namespace ToysStore.Utils
 {
-    public class AutoMapperProfiles: Profile
+    public class AutoMapperProfiles : Profile
     {
         public AutoMapperProfiles(GeometryFactory geometryFactory)
         {
@@ -24,11 +24,12 @@ namespace ToysStore.Utils
                 .ForMember(x => x.Latitude, dto => dto.MapFrom(field => field.Ubication.Y))
                 .ForMember(x => x.Longitude, dto => dto.MapFrom(field => field.Ubication.X));
 
-            //CreateMap<ToyCreationDTO, Toy>()
-            //    .ForMember(x => x.Image, options => options.Ignore())
-            //    .ForMember(x => x.ToysCategories, options => options.MapFrom(MapearPeliculasGeneros))
-            //    .ForMember(x => x.ToysBranches, options => options.MapFrom(MapearPeliculasCines))
-            //    .ForMember(x => x.ToysBrands, options => options.MapFrom(MapearPeliculasActores));
+
+            CreateMap<ToyCreationDTO, Toy>()
+                .ForMember(x => x.Image, options => options.Ignore())
+                .ForMember(x => x.ToysCategories, options => options.MapFrom(MappedToysCategories))
+                .ForMember(x => x.ToysBranches, options => options.MapFrom(MappedToysBranches))
+                .ForMember(x => x.ToysBrands, options => options.MapFrom(MappedToysBrands));
 
             //CreateMap<Toy, ToyDTO>()
             //   .ForMember(x => x.Categories, options => options.MapFrom(MapearPeliculasGeneros))
@@ -37,107 +38,56 @@ namespace ToysStore.Utils
 
         }
 
-        //private List<BranchDTO> MapearPeliculasCines(Toy toy, ToyDTO toyDTO)
-        //{
-        //    var resultado = new List<BranchDTO>();
+        private List<ToysCategories> MappedToysCategories(ToyCreationDTO toyCreationDTO, Toy toy)
+        {
+            var result = new List<ToysCategories>();
 
-        //    if (toy.ToysBranches != null)
-        //    {
-        //        foreach (var toysBranches in toy.ToysBranches)
-        //        {
-        //            resultado.Add(new BranchDTO()
-        //            {
-        //                Id = toysBranches.Branch.Id,
-        //                Name = toysBranches.Branch.Name,
-        //                Latitude = toysBranches.Branch.Ubication.Y,
-        //                Longitude = toysBranches.Branch.Ubication.X
-        //            });
-        //        }
-        //    }
+            if (toyCreationDTO.CategoriesIds == null) { return result; }
 
-        //    return resultado;
-        //}
+            foreach (var id in toyCreationDTO.CategoriesIds)
+            {
+                result.Add(new ToysCategories()
+                {
+                    CategoryId = id,
+                });
+            }
 
-        //private List<ToysBrands> MapearPeliculasActores(Toy toy, ToyDTO toyDTO)
-        //{
-        //    var result = new List<ToyBrandDTO>();
+            return result;
+        }
 
-        //    if (toy.ToysBrands != null)
-        //    {
-        //        foreach (var toysBrands in toy.ToysBrands)
-        //        {
-        //            result.Add(new ToyBrandDTO()
-        //            {
-        //                Id = toysBrands.BrandId,
-        //                Name = toysBrands.Brand.Name,
-        //                Image = toysBrands.Brand.Image,
-        //                Order = toysBrands.Order,
-        //                Website = toysBrands.Website
-        //            });
-        //        }
-        //    }
+        private List<ToysBranches> MappedToysBranches(ToyCreationDTO toyCreationDTO, Toy toy)
+        {
+            var result = new List<ToysBranches>();
 
-        //    return result;
-        //}
+            if (toyCreationDTO.BranchesIds == null) { return result; }
 
-        //private List<GeneroDTO> MapearPeliculasGeneros(Pelicula pelicula, PeliculaDTO peliculaDTO)
-        //{
-        //    var resultado = new List<GeneroDTO>();
+            foreach (var id in toyCreationDTO.BranchesIds)
+            {
+                result.Add(new ToysBranches()
+                {
+                    BranchId = id,
+                });
+            }
 
-        //    if (pelicula.PeliculasGeneros != null)
-        //    {
-        //        foreach (var genero in pelicula.PeliculasGeneros)
-        //        {
-        //            resultado.Add(new GeneroDTO() { Id = genero.GeneroId, Nombre = genero.Genero.Nombre });
-        //        }
-        //    }
+            return result;
+        }
 
-        //    return resultado;
-        //}
+        private List<ToysBrands> MappedToysBrands(ToyCreationDTO toyCreationDTO, Toy toy)
+        {
+            var result = new List<ToysBrands>();
 
-        //private List<PeliculasActores> MapearPeliculasActores(PeliculaCreacionDTO peliculaCreacionDTO,
-        //   Pelicula pelicula)
-        //{
-        //    var resultado = new List<PeliculasActores>();
+            if (toyCreationDTO.Brands == null) { return result; }
 
-        //    if (peliculaCreacionDTO.Actores == null) { return resultado; }
+            foreach (var brand in toyCreationDTO.Brands)
+            {
+                result.Add(new ToysBrands()
+                {
+                    BrandId = brand.Id,
+                    Website = brand.Website
+                });
+            }
 
-        //    foreach (var actor in peliculaCreacionDTO.Actores)
-        //    {
-        //        resultado.Add(new PeliculasActores() { ActorId = actor.Id, Personaje = actor.Personaje });
-        //    }
-
-        //    return resultado;
-        //}
-
-        //private List<PeliculasGeneros> MapearPeliculasGeneros(PeliculaCreacionDTO peliculaCreacionDTO,
-        //    Pelicula pelicula)
-        //{
-        //    var resultado = new List<PeliculasGeneros>();
-
-        //    if (peliculaCreacionDTO.GenerosIds == null) { return resultado; }
-
-        //    foreach (var id in peliculaCreacionDTO.GenerosIds)
-        //    {
-        //        resultado.Add(new PeliculasGeneros() { GeneroId = id });
-        //    }
-
-        //    return resultado;
-        //}
-
-        //private List<PeliculasCines> MapearPeliculasCines(PeliculaCreacionDTO peliculaCreacionDTO,
-        //   Pelicula pelicula)
-        //{
-        //    var resultado = new List<PeliculasCines>();
-
-        //    if (peliculaCreacionDTO.CinesIds == null) { return resultado; }
-
-        //    foreach (var id in peliculaCreacionDTO.CinesIds)
-        //    {
-        //        resultado.Add(new PeliculasCines() { CineId = id });
-        //    }
-
-        //    return resultado;
-        //}
+            return result;
+        }
     }
 }

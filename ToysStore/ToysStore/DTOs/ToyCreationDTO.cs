@@ -24,8 +24,9 @@ namespace ToysStore.DTOs
         [ModelBinder(BinderType = typeof(TypeBinder<List<int>>))]
         public List<int> BranchesIds { get; set; }
 
+
         [ModelBinder(BinderType = typeof(TypeBinder<List<BrandToyCreationDTO>>))]
-        public List<BrandToyCreationDTO> Branches { get; set; }
+        public List<BrandToyCreationDTO> Brands { get; set; }
 
     }
 }

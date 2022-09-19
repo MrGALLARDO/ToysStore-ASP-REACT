@@ -1,4 +1,4 @@
-import { toy } from "./toys.models";
+import { toyDTO } from "./toys.models";
 import IndividualToy from "./IndividualToy";
 import css from "./ListToys.module.css";
 import GenericList from "../utils/GenericList";
@@ -16,5 +16,5 @@ export default function ListToys(props: listToysProps) {
 }
 
 interface listToysProps {
-  toys?: toy[];
+  toys?: toyDTO[];
 }

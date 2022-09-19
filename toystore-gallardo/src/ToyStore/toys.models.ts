@@ -1,19 +1,23 @@
+import { branchDTO } from "../branch/branch.models";
 import { brandToyDTO } from "../brand/brands.model";
+import { CategoryDTO } from "../categories/category.model";
 
 // Modelo de interface del Juguete.
-export interface toy {
+export interface toyDTO {
   id: number;
   name: string;
   description: string;
-  agerestriction: boolean;
-  company: string;
-  price: number;
+  inStock: boolean;
+  releaseDate?: Date;
   image: string;
+  categories: CategoryDTO[];
+  branches: branchDTO[];
+  brands: brandToyDTO[];
 }
 
 export interface toyCreationDTO {
   name: string;
-  atSucursal: boolean;
+  inStock: boolean;
   description: string;
   releaseDate?: Date;
   image?: File;
@@ -25,6 +29,12 @@ export interface toyCreationDTO {
 
 // Interfaz de estado.
 export interface landingPageDTO {
-  toysRestrictionAge?: toy[];
-  toysWithOutRestrictionAge?: toy[];
+   inStock?: toyDTO[];
+   nextToys: toyDTO[];
+}
+
+export interface toyPostGetDTO{
+  toy: toyDTO;
+  categories:  CategoryDTO[];
+  branches : branchDTO[];
 }

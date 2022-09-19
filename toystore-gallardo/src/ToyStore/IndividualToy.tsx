@@ -1,4 +1,4 @@
-import { toy } from "./toys.models";
+import { toyDTO } from "./toys.models";
 import css from "./IndividualToy.module.css";
 
 export default function IndividualToy(props: individualToyProps) {
@@ -18,5 +18,5 @@ export default function IndividualToy(props: individualToyProps) {
 }
 
 interface individualToyProps {
-  toy: toy;
+  toy: toyDTO;
 }

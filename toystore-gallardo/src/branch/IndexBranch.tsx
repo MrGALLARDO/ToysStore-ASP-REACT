@@ -1,4 +1,4 @@
-import { urlBranch } from "../endpoints";
+import { urlBranches } from "../endpoints";
 import IndexEntity from "../utils/IndexEntity";
 import { branchDTO } from "./branch.models";
 
@@ -6,7 +6,7 @@ export default function IndexBranch() {
   return (
     <>
       <IndexEntity<branchDTO>
-        url={urlBranch}
+        url={urlBranches}
         urlCreate="/branch/create"
         title="Sucursales"
         nameEntity="Sucursal"

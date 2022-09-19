@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { urlBranch } from "../endpoints";
+import { urlBranches } from "../endpoints";
 import ShowErrors from "../utils/ShowErrors";
 import { branchCreationDTO } from "./branch.models";
 import FormBranch from "./FormBranch";
@@ -14,7 +14,7 @@ export default function CreateBranch() {
 
   async function create(branch: branchCreationDTO) {
     try{
-      await axios.post(urlBranch, branch)
+      await axios.post(urlBranches, branch)
       navigate('/branch')
     }
     catch(error){

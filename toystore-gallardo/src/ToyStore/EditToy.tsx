@@ -8,7 +8,7 @@ export default function EditToy() {
         brandsSelected={[]}
         model={{
           name: "test",
-          atSucursal: true,
+          inStock: true,
           description: "test",
           releaseDate: new Date("2019-01-01T00:00:00"),
         }}
