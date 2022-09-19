@@ -126,14 +126,14 @@ export default function FormToys(props: FormToyProps) {
                   <input
                     placeholder="Detalles"
                     type="text"
-                    value={brand.details}
+                    value={brand.website}
                     onChange={(e) => {
                       const index = brandsSelected.findIndex(
                         (x) => x.id === brand.id
                       );
 
                       const brands = [...brandsSelected];
-                      brands[index].details = e.currentTarget.value;
+                      brands[index].website = e.currentTarget.value;
                       setBrandsSelected(brands);
                     }}
                   />

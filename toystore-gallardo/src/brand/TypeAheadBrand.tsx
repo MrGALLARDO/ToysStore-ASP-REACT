@@ -8,21 +8,21 @@ export default function TypeAheadbrand(props: typeAheadbrandProps) {
     {
       id: 1,
       name: "Felipe",
-      details: "",
+      website: "",
       image:
         "https://m.media-amazon.com/images/M/MV5BNzZiNTEyNTItYjNhMS00YjI2LWIwMWQtZmYwYTRlNjMyZTJjXkEyXkFqcGdeQXVyMTExNzQzMDE0._V1_UX214_CR0,0,214,317_AL_.jpg",
     },
     {
       id: 2,
       name: "Fernando",
-      details: "",
+      website: "",
       image:
         "https://m.media-amazon.com/images/M/MV5BMTQ1NTQwMTYxNl5BMl5BanBnXkFtZTYwMjA1MzY1._V1_UX214_CR0,0,214,317_AL_.jpg",
     },
     {
       id: 3,
       name: "Roberto",
-      details: "",
+      website: "",
       image:
         "https://m.media-amazon.com/images/M/MV5BMjI0MTg3MzI0M15BMl5BanBnXkFtZTcwMzQyODU2Mw@@._V1_UY317_CR10,0,214,317_AL_.jpg",
     },
@@ -33,26 +33,26 @@ export default function TypeAheadbrand(props: typeAheadbrandProps) {
   const [elementDragged, setElementDragged] = 
   useState<brandToyDTO | undefined>(undefined)
 
-  function manageDragStart(actor: brandToyDTO) 
+  function manageDragStart(brand: brandToyDTO) 
   {
-      setElementDragged(actor);
+      setElementDragged(brand);
   }
 
-  function manageDragOver(actor: brandToyDTO)
+  function manageDragOver(brand: brandToyDTO)
   {
       if (!elementDragged){
           return;
       }
 
-      if (actor.id !== elementDragged.id){
+      if (brand.id !== elementDragged.id){
           const elementDraggedIndex = 
               props.brands.findIndex(x => x.id === elementDragged.id);
           const brandIndex = 
-              props.brands.findIndex(x => x.id === actor.id);
+              props.brands.findIndex(x => x.id === brand.id);
 
           const brands = [...props.brands];
           brands[brandIndex] = elementDragged;
-          brands[elementDraggedIndex] = actor;
+          brands[elementDraggedIndex] = brand;
           props.onAdd(brands);
 
       }
@@ -73,14 +73,14 @@ export default function TypeAheadbrand(props: typeAheadbrandProps) {
         options={brands}
         labelKey={(brands) => brands.name}
         filterBy={["name"]}
-        placeholder={"Escriba el nombre del Personaje"}
+        placeholder={"Escriba el nombre de la Marca"}
         minLength={1}
         flip={true}
         selected={selection}
         renderMenuItemChildren={(brand) => (
           <>
             <img
-              alt="imagen actor"
+              alt="imagen brand"
               src={brand.image}
               style={{
                 height: "64px",

@@ -22,7 +22,21 @@ export default function EditEntity<TCreation, TLecture>(
 
   async function edit(entityEdit: TCreation) {
     try {
-      await axios.put(`${props.url}/${id}`, entityEdit);
+
+      if (props.transformFormData){
+
+        const formData = props.transformFormData(entityEdit);
+        await axios({
+          method: 'put',
+          url: `${props.url}/${id}`,
+          data: formData,
+          headers:{'Content-Type': 'multipart/form-data'}
+        });
+
+      } else {
+        await axios.put(`${props.url}/${id}`, entityEdit);
+      }
+
       navigate(props.urlIndex);
     } catch (error) {
       setErrors(error.response.data);
@@ -44,6 +58,7 @@ interface editEntityProps<TCreation, TLecture> {
   nameEntity: string;
   children(entity: TCreation, edit: (entity: TCreation) => void): ReactElement;
   transform(entity: TLecture): TCreation;
+  transformFormData?(model: TCreation): FormData;
 }
 
 EditEntity.defaultProps = {

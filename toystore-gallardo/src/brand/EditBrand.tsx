@@ -1,16 +1,36 @@
+import { urlBrands } from "../endpoints";
+import EditEntity from "../utils/EditEntity";
+import { convertBrandToFormData } from "../utils/FormDataUtils";
+import { brandCreationDTO, brandDTO } from "./brands.model";
 import FormBrand from "./FormBrand";
 
 export default function EditBrand() {
+  
+  const transform = (brand : brandDTO) =>{
+    return {
+      name: brand.name,
+      imageLink: brand.image,
+      biography: brand.biography,
+      releaseDate: brand.releaseDate
+    }
+  }
+  
   return (
     <>
-      <h3>Editar Personaje</h3>
-      <FormBrand
-        model={{ name: "", releaseDate: undefined!, imageLink: '' }}
-        onSubmit={async (values) => {
-          await new Promise((r) => setTimeout(r, 3000));
-          console.log(values);
-        }}
-      />
+      <EditEntity< brandCreationDTO, brandDTO>
+        url={urlBrands}
+        urlIndex="/brand"
+        nameEntity="Marcas"
+        transformFormData={convertBrandToFormData}
+        transform={transform}
+      >
+        {(entity, edit) => (
+          <FormBrand
+            model={entity}
+            onSubmit={async values => await edit(values)}
+          />
+        )}
+      </EditEntity>
     </>
   );
 }

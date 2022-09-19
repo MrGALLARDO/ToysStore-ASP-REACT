@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ToysStore.Controllers.Entities;
+using ToysStore.Entities;
 
 namespace ToysStore
 {
@@ -11,5 +12,8 @@ namespace ToysStore
         }
 
         public DbSet<Category> categories { get; set; }
+        public DbSet<Brand> brands { get; set; }
+
+        public DbSet<Branch> branches { get; set; }
     }
 }

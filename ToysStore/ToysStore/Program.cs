@@ -1,10 +1,14 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using NetTopologySuite;
+using NetTopologySuite.Geometries;
 using ToysStore;
 using ToysStore.ApiBehavior;
 using ToysStore.Controllers.Filters;
 using ToysStore.Filters;
+using ToysStore.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,8 +24,22 @@ builder.Services.AddControllers(options =>
 
 builder.Services.AddAutoMapper(typeof(Program));
 
+builder.Services.AddSingleton(provider =>
+    new MapperConfiguration(config =>
+    {
+        var geometryFactory = provider.GetRequiredService<GeometryFactory>();
+        config.AddProfile(new AutoMapperProfiles(geometryFactory));
+    }).CreateMapper());
+
+
+builder.Services.AddSingleton<GeometryFactory>(NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326));
+
+
+builder.Services.AddTransient<IStorageFiles, StorageAzure>();
+
 builder.Services.AddDbContext<AplicationDbContext>(options =>
- options.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnection")));
+ options.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnection"),
+ sqlServer => sqlServer.UseNetTopologySuite()));
 
 builder.Services.AddCors(options =>
 {

@@ -1,14 +1,23 @@
+export interface brandDTO {
+  id: number;
+  name: string;
+  biography: string;
+  releaseDate: Date;
+  image: string;
+}
+
 export interface brandCreationDTO {
   name: string;
-  releaseDate: Date;
+  releaseDate?: Date;
   image?: File;
   imageLink?: string;
-  description?: string;
+  biography?: string;
 }
 
 export interface brandToyDTO {
   id: number;
   name: string;
-  details: string;
+  website: string;
   image: string;
 }
+

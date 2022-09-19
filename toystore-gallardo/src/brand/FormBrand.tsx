@@ -11,12 +11,12 @@ import FormGroupMarkdown from '../utils/FormGroupMarkdown';
 export default function FormBrand(props: formBrandProps) {
   const schemeBrand = Yup.object().shape({
     name: Yup.string()
-      .min(3, "El nombre del jueguete coleccionable debe de tener más de 2 caracteres.")
-      .max(50, "El nombre del jueguete coleccionable debe de tener menos de 50 caracteres.")
-      .required("El nombre del jueguete coleccionable es requerido.")
+      .min(3, "El nombre de la marca debe de tener más de 2 caracteres.")
+      .max(50, "El nombre de la marca debe de tener menos de 50 caracteres.")
+      .required("El nombre de la marca es requerido.")
       .firstCapitalLetter(),
-    releaseDate: Yup.date()
-      .required('La fecha de lanzamiento del juguete coleccionable es requerida.')
+      releaseDate: Yup.date()
+      .required('La fecha de lanzamiento de la marca es requerida.')
       .max(new Date().toString(), 'La fecha de lanzamiento no debe ser mayor al día de hoy.')
   });
 
@@ -30,19 +30,19 @@ export default function FormBrand(props: formBrandProps) {
         <Form>
           <FormGroupText
             field="name"
-            label="Nombre del Juguete Coleccionable"
-            placeholder="Nombre del Juguete Coleccionable"
+            label="Nombre de la Marca"
+            placeholder="Nombre de la marca"
           />
           <FormGroupDate field="releaseDate" label="Fecha Lanzamiento" />
           <FormGroupsImage field="image" label="Imagen" imageLink={props.model.imageLink} />
-          <FormGroupMarkdown field="description" label="Descripción" />
+          <FormGroupMarkdown field="biography" label="Biografía" />
           <Button
             disabled={isSubmitting || Object.keys(errors).length > 0}
             type="submit"
           >
             Guardar
           </Button>
-          <Link className="btn btn-secondary" to="/category">
+          <Link className="btn btn-secondary" to="/brand">
             Cancelar
           </Link>
         </Form>
