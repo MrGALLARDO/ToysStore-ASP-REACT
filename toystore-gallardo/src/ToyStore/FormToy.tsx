@@ -13,8 +13,8 @@ import SelectorMultiple, {
   selectorMultipleModel,
 } from "../utils/SelectorMultiple";
 import { branchDTO } from "../branch/branch.models";
-import TypeAheadCharacter from "../characters/TypeAheadCharacter";
-import { characterToyDTO } from "../characters/characters.model";
+import TypeAheadBrand from "../brand/TypeAheadBrand";
+import { brandToyDTO } from "../brand/brands.model";
 
 export default function FormToys(props: FormToyProps) {
   const schemaToys = Yup.object().shape({
@@ -44,9 +44,9 @@ export default function FormToys(props: FormToyProps) {
     mapped(props.branchesNotSelected)
   );
 
-  const [charactersSelected, setCharactersSelected] = useState<
-    characterToyDTO[]
-  >(props.charactersSelected);
+  const [brandsSelected, setBrandsSelected] = useState<
+    brandToyDTO[]
+  >(props.brandsSelected);
 
   function mapped(
     array: { id: number; name: string }[]
@@ -62,7 +62,7 @@ export default function FormToys(props: FormToyProps) {
       onSubmit={(values, actions) => {
         values.categoriesIds = categoriesSelected.map((value) => value.key);
         values.branchesIds = branchesSelected.map((value) => value.key);
-        values.characters = charactersSelected;
+        values.brands = brandsSelected;
         props.onSubmit(values, actions);
       }}
       validationSchema={schemaToys}
@@ -109,32 +109,32 @@ export default function FormToys(props: FormToyProps) {
           </div>
 
           <div className="form-group">
-            <TypeAheadCharacter
-              onAdd={(characters) => {
-                setCharactersSelected(characters);
+            <TypeAheadBrand
+              onAdd={(brands) => {
+                setBrandsSelected(brands);
               }}
-              onRemove={(character) => {
-                const characters = charactersSelected.filter(
-                  (x) => x !== character
+              onRemove={(brand) => {
+                const brands = brandsSelected.filter(
+                  (x) => x !== brand
                 );
-                setCharactersSelected(characters);
+                setBrandsSelected(brands);
               }}
-              characters={charactersSelected}
-              listUI={(character: characterToyDTO) => (
+              brands={brandsSelected}
+              listUI={(brand: brandToyDTO) => (
                 <>
-                  {character.name} /{" "}
+                  {brand.name} /{" "}
                   <input
                     placeholder="Detalles"
                     type="text"
-                    value={character.details}
+                    value={brand.details}
                     onChange={(e) => {
-                      const index = charactersSelected.findIndex(
-                        (x) => x.id === character.id
+                      const index = brandsSelected.findIndex(
+                        (x) => x.id === brand.id
                       );
 
-                      const characters = [...charactersSelected];
-                      characters[index].details = e.currentTarget.value;
-                      setCharactersSelected(characters);
+                      const brands = [...brandsSelected];
+                      brands[index].details = e.currentTarget.value;
+                      setBrandsSelected(brands);
                     }}
                   />
                 </>
@@ -166,5 +166,5 @@ interface FormToyProps {
   categoriesNotSelected: CategoryDTO[];
   branchesSelected: branchDTO[];
   branchesNotSelected: branchDTO[];
-  charactersSelected: characterToyDTO[];
+  brandsSelected: brandToyDTO[];
 }

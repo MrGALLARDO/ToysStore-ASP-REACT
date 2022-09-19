@@ -1,4 +1,4 @@
-export interface characterCreationDTO {
+export interface brandCreationDTO {
   name: string;
   releaseDate: Date;
   image?: File;
@@ -6,7 +6,7 @@ export interface characterCreationDTO {
   description?: string;
 }
 
-export interface characterToyDTO {
+export interface brandToyDTO {
   id: number;
   name: string;
   details: string;

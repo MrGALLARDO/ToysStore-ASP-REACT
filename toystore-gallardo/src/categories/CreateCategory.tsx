@@ -8,13 +8,13 @@ import { CategoryCreationDTO } from "./category.model";
 import FormCategory from "./FormCategory";
 
 export default function CreateCategory() {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const [errors, setErrors] = useState<string[]>([]);
 
   async function create(category: CategoryCreationDTO) {
     try {
       await axios.post(urlCategories, category);
-      history("/category");
+      navigate("/category");
     } catch (error) {
       setErrors(error.response.data);
     }

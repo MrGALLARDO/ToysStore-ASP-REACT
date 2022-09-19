@@ -1,4 +1,4 @@
-import { characterToyDTO } from "../characters/characters.model";
+import { brandToyDTO } from "../brand/brands.model";
 
 // Modelo de interface del Juguete.
 export interface toy {
@@ -20,7 +20,7 @@ export interface toyCreationDTO {
   imageLink?: string;
   categoriesIds?: number[];
   branchesIds?: number[];
-  characters?: characterToyDTO[];
+  brands?: brandToyDTO[];
 }
 
 // Interfaz de estado.

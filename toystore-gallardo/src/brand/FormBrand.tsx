@@ -1,21 +1,21 @@
 import { Form, Formik, FormikHelpers } from "formik";
-import { characterCreationDTO } from "./characters.model";
+import { brandCreationDTO } from "./brands.model";
 import * as Yup from "yup";
 import FormGroupText from "../utils/FormGroupText";
 import Button from "../utils/Buttons";
 import { Link } from "react-router-dom";
 import FormGroupDate from "../utils/FormGroupDate";
 import FormGroupsImage from "../utils/FormGroupImage";
-import FormGroupMarkdown from './../utils/FormGroupMarkdown';
+import FormGroupMarkdown from '../utils/FormGroupMarkdown';
 
-export default function FormCharacter(props: formCharacterProps) {
-  const RegisterToy = Yup.object().shape({
+export default function FormBrand(props: formBrandProps) {
+  const schemeBrand = Yup.object().shape({
     name: Yup.string()
       .min(3, "El nombre del jueguete coleccionable debe de tener más de 2 caracteres.")
       .max(50, "El nombre del jueguete coleccionable debe de tener menos de 50 caracteres.")
       .required("El nombre del jueguete coleccionable es requerido.")
       .firstCapitalLetter(),
-    releaseYear: Yup.date()
+    releaseDate: Yup.date()
       .required('La fecha de lanzamiento del juguete coleccionable es requerida.')
       .max(new Date().toString(), 'La fecha de lanzamiento no debe ser mayor al día de hoy.')
   });
@@ -23,7 +23,7 @@ export default function FormCharacter(props: formCharacterProps) {
   return (
     <Formik
       initialValues={props.model}
-      validationSchema={RegisterToy}
+      validationSchema={schemeBrand}
       onSubmit={props.onSubmit}
     >
       {({ errors, isSubmitting }) => (
@@ -33,7 +33,7 @@ export default function FormCharacter(props: formCharacterProps) {
             label="Nombre del Juguete Coleccionable"
             placeholder="Nombre del Juguete Coleccionable"
           />
-          <FormGroupDate field="releaseYear" label="Fecha Lanzamiento" />
+          <FormGroupDate field="releaseDate" label="Fecha Lanzamiento" />
           <FormGroupsImage field="image" label="Imagen" imageLink={props.model.imageLink} />
           <FormGroupMarkdown field="description" label="Descripción" />
           <Button
@@ -51,10 +51,10 @@ export default function FormCharacter(props: formCharacterProps) {
   );
 }
 
-interface formCharacterProps {
-  model: characterCreationDTO;
+interface formBrandProps {
+  model: brandCreationDTO;
   onSubmit(
-    values: characterCreationDTO,
-    action: FormikHelpers<characterCreationDTO>
+    values: brandCreationDTO,
+    action: FormikHelpers<brandCreationDTO>
   ): void;
 }

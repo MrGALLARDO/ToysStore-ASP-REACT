@@ -5,7 +5,7 @@ export default function EditToy() {
     <>
       <h3>Editar Juguetes</h3>
       <FormToys
-        charactersSelected={[]}
+        brandsSelected={[]}
         model={{
           name: "test",
           atSucursal: true,

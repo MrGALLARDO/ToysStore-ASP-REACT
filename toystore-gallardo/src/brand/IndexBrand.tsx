@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
-export default function IndexCharacter() {
+export default function IndexBrand() {
   return (
     <>
       <h3>Index Category</h3>
-      <Link to="/character/create">Crear Personaje</Link>
+      <Link to="/brand/create">Crear Personaje</Link>
     </>
   );
 }

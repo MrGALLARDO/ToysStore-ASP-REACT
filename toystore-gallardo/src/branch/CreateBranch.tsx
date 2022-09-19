@@ -10,7 +10,10 @@ export default function CreateBranch() {
           latitude: 0,
           longitude: 0,
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={async (values) => {
+          await new Promise((r) => setTimeout(r, 3000));
+          console.log(values);
+        }}
       />
     </>
   );

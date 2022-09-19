@@ -39,9 +39,9 @@ export default function Menu() {
                 className={({ isActive }) =>
                   "nav-link" + (isActive ? " active" : " inactive")
                 }
-                to="/character"
+                to="/brand"
               >
-                Personajes Coleccionables
+                Marcas
               </NavLink>
             </li>
 

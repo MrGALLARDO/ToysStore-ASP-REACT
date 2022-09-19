@@ -16,7 +16,7 @@ export default function CreateToy() {
     <>
       <h3>Crear Juguete</h3>
       <FormToys
-        charactersSelected={[]}
+        brandsSelected={[]}
         categoriesSelected={[]}
         categoriesNotSelected={categories}
         model={{ name: "", atSucursal: false, description: "" }}

@@ -1,12 +1,13 @@
-import CreateBrand from './branch/CreateBranch';
-import EditBrand from './branch/EditBranch';
-import IndexBrand from './branch/IndexBranch';
+
+import CreateBranch from './branch/CreateBranch';
+import EditBranch from './branch/EditBranch';
+import IndexBranch from './branch/IndexBranch';
+import CreateBrand from './brand/CreateBrand';
+import EditBrand from './brand/EditBrand';
+import IndexBrand from './brand/IndexBrand';
 import CreateCategory from './categories/CreateCategory';
 import EditCategory from './categories/EditCategory';
 import IndexCategory from './categories/IndexCategory';
-import CreateCharacter from './characters/CreateCharacter';
-import EditCharacter from './characters/EditCharacter';
-import IndexCharacter from './characters/IndexCharacter';
 import LandingPage from './LandingPage';
 import CreateToy from './ToyStore/CreateToy';
 import EditToy from './ToyStore/EditToy';
@@ -22,13 +23,13 @@ const routes = [
     {path:'/category', element : IndexCategory},
     {path:'/', element: LandingPage},
 
-    {path:'/character/create', element : CreateCharacter},
-    {path:'/character/edit/:id', element : EditCharacter},
-    {path:'/character', element : IndexCharacter},
+    {path:'/brand/create', element : CreateBrand},
+    {path:'/brand/edit/:id', element : EditBrand},
+    {path:'/brand', element : IndexBrand},
 
-    {path:'/branch/create', element : CreateBrand},
-    {path:'/branch/edit/:id', element : EditBrand},
-    {path:'/branch', element : IndexBrand},
+    {path:'/branch/create', element : CreateBranch},
+    {path:'/branch/edit/:id', element : EditBranch},
+    {path:'/branch', element : IndexBranch},
 
     {path:'/toy/create', element : CreateToy},
     {path:'/toy/edit/:id', element : EditToy},
