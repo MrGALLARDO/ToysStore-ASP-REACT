@@ -2,7 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { urlCategories } from "../endpoints";
-import ShowErrors from "../utils/ShowErros";
+import ShowErrors from "../utils/ShowErrors";
+
 import { CategoryCreationDTO } from "./category.model";
 import FormCategory from "./FormCategory";
 

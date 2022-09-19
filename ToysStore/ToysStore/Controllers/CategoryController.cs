@@ -39,10 +39,17 @@ namespace ToysStore.Controllers
             return mapper.Map<List<CategoryDTO>>(categories);
         }
 
-        [HttpGet("{Id:int}/")]
-        public async Task<ActionResult<Category>> Get(int Id)
+        [HttpGet("{Id:int}")]
+        public async Task<ActionResult<CategoryDTO>> Get(int Id)
         {
-            throw new NotImplementedException();
+            var category = await context.categories.FirstOrDefaultAsync(x => x.Id == Id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            return mapper.Map<CategoryDTO>(category);
         }
 
         [HttpPost]
@@ -54,16 +61,38 @@ namespace ToysStore.Controllers
             return NoContent();
         }
 
-        [HttpPut]
-        public ActionResult Put([FromBody] Category category)
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Put(int id, [FromBody] CategoryCreationDTO categoryCreationDTO)
         {
-            throw new NotImplementedException();
+            var category = await context.categories.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            category = mapper.Map(categoryCreationDTO, category);
+
+            await context.SaveChangesAsync();
+
+            return NoContent();
         }
 
-        [HttpDelete]
-        public ActionResult Delete()
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
         {
-            throw new NotImplementedException();
+            var exist = await context.categories.AnyAsync(x => x.Id == id);
+
+            if (!exist)
+            {
+                return NotFound();
+            }
+
+            context.Remove(new Category() { Id = id });
+
+            await context.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }
