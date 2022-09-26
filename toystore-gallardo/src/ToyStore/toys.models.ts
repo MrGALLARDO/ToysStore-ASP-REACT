@@ -34,7 +34,7 @@ export interface toyCreationDTO {
 // Interfaz de estado.
 export interface landingPageDTO {
    inStock?: toyDTO[];
-   nextToys: toyDTO[];
+   nextToys?: toyDTO[];
 }
 
 export interface toyPostGetDTO{

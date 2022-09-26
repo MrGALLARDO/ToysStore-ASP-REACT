@@ -1,13 +1,36 @@
+import axios, { AxiosResponse } from "axios";
+import { useState, useEffect } from "react";
+import { urlToys } from "./endpoints";
+import ListToys from "./ToyStore/ListToys";
+import { landingPageDTO } from "./ToyStore/toys.models";
+import AlertContext from "./utils/AlertContext";
+
 
 export default function LandingPage() {
 
-  return (
-    <>
-      <h3>Restricción de Edad</h3>
-      {/* <ListToys toys={toys.inStock} /> */}
+    const [toys, setToys] = useState<landingPageDTO>({})
 
-      <h3>Sin Restricción de Edad</h3>
-      {/* <ListToys toys={toys.nextToys} /> */}
-    </>
-  );
+    useEffect(() => {
+        cargarDatos();
+    }, [])
+
+    function cargarDatos() {
+        axios.get(urlToys)
+            .then((respuesta: AxiosResponse<landingPageDTO>) => {
+              setToys(respuesta.data);
+            })
+    }
+
+    return (
+        <>
+            <AlertContext.Provider value={() => cargarDatos()}>
+                <h3>En Cartelera</h3>
+                <ListToys toys={toys.inStock} />
+
+                <h3>Próximos Estrenos</h3>
+                <ListToys toys={toys.nextToys} />
+            </AlertContext.Provider>
+
+        </>
+    )
 }

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PeliculasAPI.DTOs;
 using ToysStore.Controllers.Entities;
 using ToysStore.DTOs;
 using ToysStore.Utils;
@@ -24,6 +26,32 @@ namespace ToysStore.Controllers
             this.context = context;
             this.mapper = mapper;
             this.storageFiles = storageFiles;
+        }
+        [HttpGet]
+        public async Task<ActionResult<LandingPageDTO>> Get()
+        {
+            var top = 6;
+            var now = DateTime.Today;
+
+            var nextToys = await context.toys
+                .Where(x => x.RegisterDate > now)
+                .OrderBy(x => x.RegisterDate)
+                .Take(top)
+                .ToListAsync();
+
+            var inStock = await context.toys
+                .Where(x => x.InStock)
+                .OrderBy(x => x.RegisterDate)
+                .Take(top)
+                .ToListAsync();
+
+            var result = new LandingPageDTO();
+
+            result.nextToys = mapper.Map<List<ToyDTO>>(nextToys);
+
+            result.inStock = mapper.Map<List<ToyDTO>>(inStock);
+
+            return result;
         }
 
         [HttpGet("{id:int}")]
