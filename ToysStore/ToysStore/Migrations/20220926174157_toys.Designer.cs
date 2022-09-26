@@ -13,8 +13,8 @@ using ToysStore;
 namespace ToysStore.Migrations
 {
     [DbContext(typeof(AplicationDbContext))]
-    [Migration("20220919103200_Initial")]
-    partial class Initial
+    [Migration("20220926174157_toys")]
+    partial class toys
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,7 +57,6 @@ namespace ToysStore.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("InStock")
@@ -67,8 +66,15 @@ namespace ToysStore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("registerDate")
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(3,2)");
+
+                    b.Property<DateTime>("RegisterDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Review")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -89,7 +95,6 @@ namespace ToysStore.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<Point>("Ubication")
-                        .IsRequired()
                         .HasColumnType("geography");
 
                     b.HasKey("Id");
@@ -106,12 +111,10 @@ namespace ToysStore.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Biography")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -152,10 +155,6 @@ namespace ToysStore.Migrations
 
                     b.Property<int>("Order")
                         .HasColumnType("int");
-
-                    b.Property<string>("Website")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BrandId", "ToyId");
 

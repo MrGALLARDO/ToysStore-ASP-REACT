@@ -31,7 +31,6 @@ builder.Services.AddSingleton(provider =>
         config.AddProfile(new AutoMapperProfiles(geometryFactory));
     }).CreateMapper());
 
-
 builder.Services.AddSingleton<GeometryFactory>(NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326));
 
 builder.Services.AddTransient<IStorageFiles, StorageAzure>();
@@ -59,8 +58,6 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -81,4 +78,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-

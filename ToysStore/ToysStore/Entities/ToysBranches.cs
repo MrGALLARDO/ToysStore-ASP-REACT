@@ -11,6 +11,5 @@ namespace ToysStore.Entities
         public Toy Toy { get; set; }
 
         public Branch Branch { get; set; }
-
     }
 }

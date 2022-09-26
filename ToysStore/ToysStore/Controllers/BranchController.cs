@@ -30,7 +30,6 @@ namespace ToysStore.Controllers
             return mapper.Map<List<BranchDTO>>(branches);
         }
 
-
         [HttpGet("{Id:int}")]
         public async Task<ActionResult<BranchDTO>> Get(int Id)
         {
@@ -44,7 +43,6 @@ namespace ToysStore.Controllers
             return mapper.Map<BranchDTO>(branches);
         }
 
-
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] BranchCreationDTO branchCreationDTO)
         {
@@ -53,7 +51,6 @@ namespace ToysStore.Controllers
             await context.SaveChangesAsync();
             return NoContent();
         }
-
 
         [HttpPut("{id:int}")]
         public async Task<ActionResult> Put(int id, [FromBody] BranchCreationDTO branchCreationDTO)

@@ -41,11 +41,8 @@ namespace ToysStore.Utils
 
         public async Task<string> EditFile(string container, IFormFile file, string path)
         {
-
             await DeleteFile(path, container);
             return await SaveFile(container, file);
-
         }
     }
 }
-

@@ -1,7 +1,4 @@
-﻿using ToysStore.Controllers.Entities;
-using ToysStore.Entities;
-
-namespace ToysStore.DTOs
+﻿namespace ToysStore.DTOs
 {
     public class ToyBrandDTO
     {
@@ -9,6 +6,6 @@ namespace ToysStore.DTOs
         public string Name { get; set; }
         public string Image { get; set; }
         //public string Website { get; set; }
-        //public int Order { get; set; }
+        public int Order { get; set; }
     }
 }

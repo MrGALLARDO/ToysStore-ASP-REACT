@@ -7,7 +7,7 @@ namespace ToysStore.Validations
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
             if (value == null || string.IsNullOrEmpty(value.ToString()))
-           {
+            {
                 return ValidationResult.Success;
             }
 
@@ -17,7 +17,7 @@ namespace ToysStore.Validations
             {
                 return new ValidationResult("La primera letra debe ser Mayúscula");
             }
-            
+
             return ValidationResult.Success;
         }
     }

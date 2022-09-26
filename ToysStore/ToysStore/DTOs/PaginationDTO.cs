@@ -8,17 +8,16 @@
 
         private readonly int maxRecordsPage = 50;
 
-        public int RecordsPerPage 
-        { 
-            get 
-            { 
-                return recordsPerPage; 
-            } 
-            set 
-            { 
+        public int RecordsPerPage
+        {
+            get
+            {
+                return recordsPerPage;
+            }
+            set
+            {
                 recordsPerPage = (value > maxRecordsPage) ? maxRecordsPage : value;
-            } 
+            }
         }
-
     }
 }

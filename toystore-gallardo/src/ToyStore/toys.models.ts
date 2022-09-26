@@ -8,7 +8,9 @@ export interface toyDTO {
   name: string;
   description: string;
   inStock: boolean;
-  releaseDate?: Date;
+  price: number;
+  review: string;
+  releaseDate: Date;
   image: string;
   categories: CategoryDTO[];
   branches: branchDTO[];
@@ -19,9 +21,11 @@ export interface toyCreationDTO {
   name: string;
   inStock: boolean;
   description: string;
+  price: number;
   releaseDate?: Date;
   image?: File;
   imageLink?: string;
+  review: string;
   categoriesIds?: number[];
   branchesIds?: number[];
   brands?: brandToyDTO[];

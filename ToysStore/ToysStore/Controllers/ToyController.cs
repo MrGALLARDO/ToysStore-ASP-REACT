@@ -21,8 +21,26 @@ namespace ToysStore.Controllers
            IStorageFiles storageFiles)
         {
             this.context = context;
+            this.context = context;
             this.mapper = mapper;
             this.storageFiles = storageFiles;
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<ToyDTO>> Get(int id)
+        {
+            Toy toy = await context.toys
+            .Include(x => x.ToysCategories).ThenInclude(x => x.category)
+            .Include(x => x.ToysBrands).ThenInclude(x => x.Brand)
+            .Include(x => x.ToysBranches).ThenInclude(x => x.Branch)
+            .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (toy == null) { return NotFound(); }
+
+            var dto = mapper.Map<ToyDTO>(toy);
+            dto.Brands = dto.Brands.OrderBy(x => x.Order).ToList();
+
+            return dto;
         }
 
         [HttpPost]
@@ -33,7 +51,6 @@ namespace ToysStore.Controllers
             if (toyCreationDTO.Image != null)
             {
                 toy.Image = await storageFiles.SaveFile(container, toyCreationDTO.Image);
-
             }
 
             OrderBrands(toy);
@@ -43,7 +60,7 @@ namespace ToysStore.Controllers
             return NoContent();
         }
 
-        [HttpGet("PostGet")] 
+        [HttpGet("PostGet")]
         public async Task<ActionResult<ToyPostGetDTO>> PostGet()
         {
             var branches = await context.branches.ToListAsync();
@@ -53,20 +70,15 @@ namespace ToysStore.Controllers
             var categoryDTO = mapper.Map<List<CategoryDTO>>(categories);
 
             return new ToyPostGetDTO() { Branches = branchDTO, Categories = categoryDTO };
-
         }
 
         private void OrderBrands(Toy toy)
         {
-            if(toy.ToysBrands != null)
+            if (toy.ToysBrands != null)
             {
-                for (int i = 0 ; i < toy.ToysBrands.Count; i++)
-                {
-                    toy.ToysBrands[i].Order = i;
-                }
+                int order = 0;
+                toy.ToysBrands.ToList().ForEach(tb => tb.Order = (order++));
             }
         }
-
     }
-
 }

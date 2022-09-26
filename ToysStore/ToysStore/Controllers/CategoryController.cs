@@ -1,8 +1,5 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 using ToysStore.Controllers.Entities;
@@ -13,10 +10,8 @@ namespace ToysStore.Controllers
 {
     [Route("api/category")]
     [ApiController]
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CategoryController : ControllerBase
     {
-
         private readonly ILogger<CategoryController> logger;
         private readonly AplicationDbContext context;
         private readonly IMapper mapper;

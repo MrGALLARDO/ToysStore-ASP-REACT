@@ -11,6 +11,9 @@ export default function EditToy() {
           inStock: true,
           description: "test",
           releaseDate: new Date("2019-01-01T00:00:00"),
+          price:0,
+          review : ''
+          ,
         }}
         onSubmit={(valores) => console.log(valores)}
         categoriesSelected={[]}

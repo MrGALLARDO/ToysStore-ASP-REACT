@@ -5,6 +5,7 @@ namespace ToysStore.Entities
     public class Brand
     {
         public int Id { get; set; }
+
         [Required]
         [StringLength(maximumLength: 50)]
         public string Name { get; set; }
@@ -16,6 +17,6 @@ namespace ToysStore.Entities
 
         public string Image { get; set; }
 
-        public List<ToysBrands> ToysBrands { get; set; }
+        public ICollection<ToysBrands> ToysBrands { get; set; }
     }
 }

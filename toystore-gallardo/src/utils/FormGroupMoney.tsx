@@ -1,15 +1,18 @@
 import { Field, ErrorMessage } from "formik";
 import ShowErrorField from "./ShowErrorField";
 
-export default function FormGroupMoney(props: formGroupTextProps) {
+export default function FormGroupNumber(props: formGroupTextProps) {
   return (
-    <div className="input-group mb-3">
+    <div className="form-group">
       {props.label ? <label htmlFor={props.field}>{props.label}</label> : null}
+
       <Field
+        type="number"
         name={props.field}
-        className="form-input-group-text"
+        className="form-control"
         placeholder={props.placeholder}
       />
+   
       <ErrorMessage name={props.field}>
         {(message) => <ShowErrorField message={message} />}
       </ErrorMessage>

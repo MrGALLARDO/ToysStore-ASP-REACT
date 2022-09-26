@@ -16,17 +16,18 @@ namespace ToysStore.DTOs
 
         public DateTime registerDate { get; set; }
 
+        [StringLength(maximumLength: 100)]
+        public string? Review { get; set; }
+
         public IFormFile Image { get; set; }
 
-        [ModelBinder(BinderType =typeof(TypeBinder<List<int>>))]
+        [ModelBinder(BinderType = typeof(TypeBinder<List<int>>))]
         public List<int> CategoriesIds { get; set; }
 
         [ModelBinder(BinderType = typeof(TypeBinder<List<int>>))]
         public List<int> BranchesIds { get; set; }
 
-
         [ModelBinder(BinderType = typeof(TypeBinder<List<BrandToyCreationDTO>>))]
         public List<BrandToyCreationDTO> Brands { get; set; }
-
     }
 }

@@ -1,5 +1,4 @@
 ﻿using ToysStore.Controllers.Entities;
-using ToysStore.Entities;
 
 namespace ToysStore.Entities
 {

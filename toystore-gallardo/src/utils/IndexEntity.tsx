@@ -1,7 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { ReactElement, useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-import { number } from "yup";
 import Button from "./Buttons";
 import GenericList from "./GenericList";
 import Pagination from "./Pagination";
@@ -41,8 +40,8 @@ export default function IndexEntity<T>(props: indexEntityProps<T>) {
         }
     }
 
-    const buttons = (urlEditar: string, id: number) => <>
-        <Link className="btn btn-success" to={urlEditar}>Editar</Link>
+    const buttons = (urlEdit: string, id: number) => <>
+        <Link className="btn btn-success" to={urlEdit}>Editar</Link>
         <Button
             onClick={() => confirm(() => deleteCategory(id))}
             className="btn btn-danger">Borrar</Button>
@@ -71,8 +70,11 @@ export default function IndexEntity<T>(props: indexEntityProps<T>) {
                 </select>
             </div>
 
-            <Pagination quantityTotalPages={totalPages}
-                currentPage ={page} onChange={newPage => setPage(newPage)} />
+            <Pagination 
+                quantityTotalPages={totalPages}
+                currentPage ={page} 
+                onChange={(newPage) => setPage(newPage)} 
+            />
 
             <GenericList list={entities}>
                 <table className="table table-striped">

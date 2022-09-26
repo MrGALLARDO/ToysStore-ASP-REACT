@@ -8,23 +8,22 @@ namespace ToysStore
     {
         public AplicationDbContext(DbContextOptions options) : base(options)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<ToysBrands>()
-                .HasKey(x => new {x.BrandId,x.ToyId});
+                .HasKey(x => new { x.BrandId, x.ToyId });
 
             modelBuilder.Entity<ToysCategories>()
-             .HasKey(x => new { x.ToyId , x.CategoryId});
+             .HasKey(x => new { x.ToyId, x.CategoryId });
 
             modelBuilder.Entity<ToysBranches>()
-             .HasKey(x => new { x.ToyId , x.BranchId});
+             .HasKey(x => new { x.ToyId, x.BranchId });
 
             base.OnModelCreating(modelBuilder);
         }
+
         public DbSet<Category> categories { get; set; }
         public DbSet<Brand> brands { get; set; }
 

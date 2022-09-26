@@ -17,7 +17,7 @@ export interface brandCreationDTO {
 export interface brandToyDTO {
   id: number;
   name: string;
-  website: string;
+  // website: string;
   image: string;
 }
 

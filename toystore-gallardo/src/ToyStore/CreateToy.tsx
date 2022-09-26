@@ -54,7 +54,7 @@ export default function CreateToy() {
         brandsSelected={[]}
         categoriesSelected={[]}
         categoriesNotSelected={categoriesNotSelected}
-        model={{ name: "", inStock: false, description: "" }}
+        model={{ name: "", inStock: false, description: "", price:0, review:""}}
         onSubmit={async values => create(values)}
         branchesSelected={[]}
         branchesNotSelected={branchesNotSelected}

@@ -3,7 +3,6 @@ import { toyCreationDTO } from "./toys.models";
 import * as Yup from "yup";
 import FormGroupText from "../utils/FormGroupText";
 import FormGroupCheckbox from "../utils/FormGroupCheckbox";
-import FormGroupDate from "../utils/FormGroupDate";
 import FormGroupImage from "../utils/FormGroupImage";
 import Button from "../utils/Buttons";
 import { Link } from "react-router-dom";
@@ -15,19 +14,26 @@ import SelectorMultiple, {
 import { branchDTO } from "../branch/branch.models";
 import TypeAheadBrand from "../brand/TypeAheadBrand";
 import { brandToyDTO } from "../brand/brands.model";
+import FormGroupNumber from "../utils/FormGroupMoney";
 
 export default function FormToys(props: FormToyProps) {
   const schemaToys = Yup.object().shape({
     name: Yup.string()
-      .min(3, "El nombre de la marca debe de tener más de 2 caracteres")
+      .min(3, "El nombre del juguete debe de tener más de 2 caracteres")
       .max(50, "El nombre de la marca debe de tener menos de 50 caracteres")
       .required("El nombre de la marca es requerido")
       .firstCapitalLetter(),
     description: Yup.string()
-      .min(3, "El nombre de la marca debe de tener más de 2 caracteres")
-      .max(50, "El nombre de la marca debe de tener menos de 50 caracteres")
-      .required("El nombre de la marca es requerido")
+      .min(3, "La descripción del juguetedebe de tener más de 2 caracteres")
+      .max(50, "La descripción debe de tener menos de 50 caracteres")
+      .required("La descripción es requerido")
       .firstCapitalLetter(),
+      price: Yup.number()
+      .min(1,"El precio del juguete debe ser mayor a $0")
+      .max(1000,"El precio del juguete debe ser menor a $1000")
+      .required("El precio del juguete es requerido."),
+      review: Yup.string()
+      .max(100, "El review del juguete debe de tener menos de 50 caracteres")
   });
 
   const [categoriesSelected, setCategoriesSelected] = useState(
@@ -75,9 +81,10 @@ export default function FormToys(props: FormToyProps) {
             placeholder="Nombre Juguete"
           />
 
-          <FormGroupCheckbox label="En sucursal" field="atSucursal" />
+          <FormGroupCheckbox label="En sucursal" field="inStock" />
           <FormGroupText label="Descripción" field={"description"} />
-          <FormGroupDate label="Fecha Lanzamiento" field="releaseDate" />
+          <FormGroupNumber label="Precio:" field={"price"} />
+          <FormGroupText label="Review" field={"review"} />
           <FormGroupImage
             field="image"
             label="Imagen"
@@ -122,8 +129,8 @@ export default function FormToys(props: FormToyProps) {
               brands={brandsSelected}
               listUI={(brand: brandToyDTO) => (
                 <>
-                  {brand.name} /{" "}
-                  <input
+                  {brand.name} 
+                  {/* <input
                     placeholder="Detalles"
                     type="text"
                     value={brand.website}
@@ -136,13 +143,14 @@ export default function FormToys(props: FormToyProps) {
                       brands[index].website = e.currentTarget.value;
                       setBrandsSelected(brands);
                     }}
-                  />
+                  /> */}
                 </>
-              )}
+              )
+            }
             />
           </div>
           <Button
-            disabled={isSubmitting || Object.keys(errors).length > 0}
+            disabled={isSubmitting}
             type="submit"
           >
             Guardar

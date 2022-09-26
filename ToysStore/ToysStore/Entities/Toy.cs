@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using ToysStore.Entities;
 
 namespace ToysStore.Controllers.Entities
@@ -7,23 +9,31 @@ namespace ToysStore.Controllers.Entities
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        [Required(ErrorMessage = "El campo {0} es requerido.")]
+        public string Name { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El campo {0} es requerido.")]
         [StringLength(maximumLength: 50)]
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         public bool InStock { get; set; }
 
-        public DateTime registerDate { get; set; }
+        [Required()]
+        [Range(0, 1000.00)]
+        [Column(TypeName = "decimal(3,2)")]
+        public decimal Price { get; set; }
 
-        public string Image { get; set; }
+        public DateTime RegisterDate { get; set; } = DateTime.Now;
 
+        [StringLength(maximumLength: 50)]
+        public string? Review { get; set; }
 
-        public List<ToysBrands> ToysBrands { get; set; }
+        public string? Image { get; set; }
 
-        public List<ToysCategories> ToysCategories { get; set; }
-        public List<ToysBranches> ToysBranches { get; set; }
+        public List<ToysBrands>? ToysBrands { get; set; }
 
+        public List<ToysCategories>? ToysCategories { get; set; }
+
+        public List<ToysBranches>? ToysBranches { get; set; }
     }
 }

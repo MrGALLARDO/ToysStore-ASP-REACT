@@ -47,6 +47,7 @@ export default function FormGroupImage(props: FormGroupImageProps) {
           type="file"
           accept=".jpg,.jpeg,.png"
           onChange={controlOnChange}
+          className="form-control" 
         />
       </div>
       {imageBase64 ? (

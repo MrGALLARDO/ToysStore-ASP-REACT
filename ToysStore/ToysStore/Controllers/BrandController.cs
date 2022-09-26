@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ToysStore.Controllers.Entities;
 using ToysStore.DTOs;
 using ToysStore.Entities;
 using ToysStore.Utils;
@@ -26,7 +25,7 @@ namespace ToysStore.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<BrandDTO>>> Get([FromQuery] PaginationDTO paginationDTO )
+        public async Task<ActionResult<List<BrandDTO>>> Get([FromQuery] PaginationDTO paginationDTO)
         {
             var queryable = context.brands.AsQueryable();
             await HttpContext.InsertParameterPaginationInHeader(queryable);
@@ -50,12 +49,12 @@ namespace ToysStore.Controllers
         [HttpGet("findByName/{name}")]
         public async Task<List<ToyBrandDTO>> findByName(string name = "")
         {
-            if (string.IsNullOrEmpty(name)) { return new List<ToyBrandDTO>(); }
+            if (string.IsNullOrWhiteSpace(name)) { return new List<ToyBrandDTO>(); }
 
             return await context.brands
                 .Where(x => x.Name.Contains(name))
                 .OrderBy(x => x.Name)
-                .Select(x => new ToyBrandDTO { Id = x.Id, Name = x.Name , Image = x.Image})
+                .Select(x => new ToyBrandDTO { Id = x.Id, Name = x.Name, Image = x.Image })
                 .Take(5)
                 .ToListAsync();
         }
@@ -64,11 +63,11 @@ namespace ToysStore.Controllers
         public async Task<ActionResult> Post([FromForm] BrandCreationDTO brandCreationDTO)
         {
             var brand = mapper.Map<Brand>(brandCreationDTO);
-            
-            if(brandCreationDTO.Image != null)
+
+            if (brandCreationDTO.Image != null)
             {
                 brand.Image = await storageFiles.SaveFile(container, brandCreationDTO.Image);
-            } 
+            }
 
             context.Add(brand);
             await context.SaveChangesAsync();
@@ -87,11 +86,11 @@ namespace ToysStore.Controllers
 
             brand = mapper.Map(brandCreationDTO, brand);
 
-            if(brandCreationDTO.Image != null)
+            if (brandCreationDTO.Image != null)
             {
                 brand.Image = await storageFiles.EditFile(container, brandCreationDTO.Image, brand.Image);
             }
-        
+
             await context.SaveChangesAsync();
 
             return NoContent();
@@ -100,9 +99,9 @@ namespace ToysStore.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var brand = await context.brands.FirstOrDefaultAsync(x=> x.Id == id);
+            var brand = await context.brands.FirstOrDefaultAsync(x => x.Id == id);
 
-            if(brand == null)
+            if (brand == null)
             {
                 return NotFound();
             }

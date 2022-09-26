@@ -10,10 +10,10 @@ import EditCategory from './categories/EditCategory';
 import IndexCategory from './categories/IndexCategory';
 import LandingPage from './LandingPage';
 import CreateToy from './ToyStore/CreateToy';
+import DetailToy from './ToyStore/DetailToy';
 import EditToy from './ToyStore/EditToy';
 import FilterToy from './ToyStore/FilterToys';
 import RedirectLanding from './utils/RedirectLanding';
-
 
 // Configuramos ruteo.
 const routes = [
@@ -30,6 +30,8 @@ const routes = [
     {path:'/branch/create', element : CreateBranch},
     {path:'/branch/edit/:id', element : EditBranch},
     {path:'/branch', element : IndexBranch},
+
+    {path:'/toy/:id', element : DetailToy},
 
     {path:'/toy/create', element : CreateToy},
     {path:'/toy/edit/:id', element : EditToy},

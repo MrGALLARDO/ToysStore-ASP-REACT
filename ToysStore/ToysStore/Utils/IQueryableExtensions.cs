@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using ToysStore.DTOs;
+﻿using ToysStore.DTOs;
 
 namespace ToysStore.Utils
 {

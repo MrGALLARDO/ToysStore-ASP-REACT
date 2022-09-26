@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ToysStore.DTOs
+﻿namespace ToysStore.DTOs
 {
     public class BrandDTO
     {
