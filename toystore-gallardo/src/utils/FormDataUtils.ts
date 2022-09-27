@@ -10,8 +10,8 @@ export function convertBrandToFormData(brand: brandCreationDTO): FormData{
         formData.append('biography', brand.biography);
     }
 
-    if (brand.releaseDate){
-        formData.append("releaseDate", formatDate(brand.releaseDate));
+    if (brand.comingSoonDate){
+        formData.append("comingSoonDate", formatDate(brand.comingSoonDate));
     }
 
     if (brand.image){
@@ -32,8 +32,8 @@ export function convertToyToFormData(toy: toyCreationDTO): FormData {
 
     formData.append('description', toy.description);
     formData.append('inStock', String(toy.inStock));
-    if (toy.releaseDate){
-        formData.append("registerDate", formatDate(toy.releaseDate));
+    if (toy.comingSoonDate){
+        formData.append("comingsoondate", formatDate(toy.comingSoonDate));
     }
 
     if (toy.image){

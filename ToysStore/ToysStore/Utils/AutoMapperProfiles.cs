@@ -12,6 +12,7 @@ namespace ToysStore.Utils
         {
             CreateMap<Category, CategoryDTO>().ReverseMap();
             CreateMap<CategoryCreationDTO, Category>();
+
             CreateMap<Brand, BrandDTO>().ReverseMap();
             CreateMap<BrandCreationDTO, Brand>()
                 .ForMember(x => x.Image, options => options.Ignore());
@@ -39,14 +40,15 @@ namespace ToysStore.Utils
         private List<CategoryDTO> MappedToysDTOCategories(Toy toy, ToyDTO toyDTO)
         {
             var result = new List<CategoryDTO>();
-            
-            if(toy.ToysCategories != null){
-                foreach(var categoryToy in toy.ToysCategories)
+
+            if (toy.ToysCategories != null)
+            {
+                foreach (var categoryToy in toy.ToysCategories)
                 {
-                    result.Add(new CategoryDTO() 
-                    { 
+                    result.Add(new CategoryDTO()
+                    {
                         Id = categoryToy.ToyId,
-                        Name = categoryToy.category.Name 
+                        Name = categoryToy.category.Name
                     });
                 }
             }
@@ -62,12 +64,12 @@ namespace ToysStore.Utils
             {
                 foreach (var brandToy in toy.ToysBrands)
                 {
-                    result.Add(new ToyBrandDTO() 
-                    { 
-                       Id = brandToy.ToyId, 
-                       Name = brandToy.Brand.Name,
-                       Image = brandToy.Brand.Image,
-                       Order = brandToy.Order
+                    result.Add(new ToyBrandDTO()
+                    {
+                        Id = brandToy.ToyId,
+                        Name = brandToy.Brand.Name,
+                        Image = brandToy.Brand.Image,
+                        Order = brandToy.Order
                     });
                 }
             }

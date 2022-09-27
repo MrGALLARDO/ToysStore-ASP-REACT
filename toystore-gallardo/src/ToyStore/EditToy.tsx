@@ -10,7 +10,7 @@ export default function EditToy() {
           name: "test",
           inStock: true,
           description: "test",
-          releaseDate: new Date("2019-01-01T00:00:00"),
+          comingSoonDate: new Date("2019-01-01T00:00:00"),
           price:0,
           review : ''
           ,

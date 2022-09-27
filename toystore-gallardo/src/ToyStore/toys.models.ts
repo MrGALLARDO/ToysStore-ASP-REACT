@@ -10,7 +10,7 @@ export interface toyDTO {
   inStock: boolean;
   price: number;
   review: string;
-  releaseDate: Date;
+  comingSoonDate: Date;
   image: string;
   categories: CategoryDTO[];
   branches: branchDTO[];
@@ -22,7 +22,7 @@ export interface toyCreationDTO {
   inStock: boolean;
   description: string;
   price: number;
-  releaseDate?: Date;
+  comingSoonDate?: Date;
   image?: File;
   imageLink?: string;
   review: string;

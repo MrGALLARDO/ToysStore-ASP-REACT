@@ -2,10 +2,23 @@ import { toyDTO } from "./toys.models";
 import css from "./IndividualToy.module.css";
 import { Link } from "react-router-dom";
 import Button from "../utils/Buttons";
+import Confirm from "../utils/Confirm";
+import axios from "axios";
+import { urlToys } from "../endpoints";
+import { useContext } from "react";
+import AlertContext from "../utils/AlertContext";
 
 export default function IndividualToy(props: individualToyProps) {
   // Construcción del Link.
   const buildLink = () => `/toy/${props.toy.id}`;
+  const alerts = useContext(AlertContext);
+
+  function DeleteToy(){
+    axios.delete(`${urlToys}/${props.toy.id}`)
+    .then(() => {
+      alerts();
+    })
+  }
 
   return (
     <div className={css.div}>
@@ -24,7 +37,11 @@ export default function IndividualToy(props: individualToyProps) {
         >
           Editar
         </Link>
-        <Button>Borrar</Button>
+        <Button 
+        onClick={()=>Confirm(() => DeleteToy())}
+        className="btn btn-danger">
+          Borrar
+        </Button>
       </div>
     </div>
   );

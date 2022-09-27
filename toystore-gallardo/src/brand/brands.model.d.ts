@@ -2,13 +2,13 @@ export interface brandDTO {
   id: number;
   name: string;
   biography: string;
-  releaseDate: Date;
+  comingSoonDate: Date;
   image: string;
 }
 
 export interface brandCreationDTO {
   name: string;
-  releaseDate?: Date;
+  comingSoonDate?: Date;
   image?: File;
   imageLink?: string;
   biography?: string;

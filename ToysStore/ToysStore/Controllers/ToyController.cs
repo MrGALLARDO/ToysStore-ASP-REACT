@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PeliculasAPI.DTOs;
@@ -23,33 +22,33 @@ namespace ToysStore.Controllers
            IStorageFiles storageFiles)
         {
             this.context = context;
-            this.context = context;
             this.mapper = mapper;
             this.storageFiles = storageFiles;
         }
+
         [HttpGet]
         public async Task<ActionResult<LandingPageDTO>> Get()
         {
             var top = 6;
             var now = DateTime.Today;
 
-            var nextToys = await context.toys
-                .Where(x => x.RegisterDate > now)
-                .OrderBy(x => x.RegisterDate)
+            var comingSoonToys = await context.toys
+                .Where(x => x.ComingSoonDate > now)
+                .OrderBy(x => x.ComingSoonDate)
                 .Take(top)
                 .ToListAsync();
 
             var inStock = await context.toys
                 .Where(x => x.InStock)
-                .OrderBy(x => x.RegisterDate)
+                .OrderBy(x => x.ComingSoonDate)
                 .Take(top)
                 .ToListAsync();
 
             var result = new LandingPageDTO();
 
-            result.nextToys = mapper.Map<List<ToyDTO>>(nextToys);
+            result.ComingSoonToys = mapper.Map<List<ToyDTO>>(comingSoonToys);
 
-            result.inStock = mapper.Map<List<ToyDTO>>(inStock);
+            result.InStock = mapper.Map<List<ToyDTO>>(inStock);
 
             return result;
         }
@@ -71,21 +70,39 @@ namespace ToysStore.Controllers
             return dto;
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Post([FromForm] ToyCreationDTO toyCreationDTO)
+        [HttpGet("filter")]
+        public async Task<ActionResult<List<ToyDTO>>> Filter([FromQuery] ToyFilterDTO toyFilterDTO)
         {
-            var toy = mapper.Map<Toy>(toyCreationDTO);
+            var toysQueryable = context.toys.AsQueryable();
 
-            if (toyCreationDTO.Image != null)
+            if (!string.IsNullOrEmpty(toyFilterDTO.Name))
             {
-                toy.Image = await storageFiles.SaveFile(container, toyCreationDTO.Image);
+                toysQueryable = toysQueryable.Where(x => x.Name.Contains(toyFilterDTO.Name));
             }
 
-            OrderBrands(toy);
+            if (toyFilterDTO.InStock)
+            {
+                toysQueryable = toysQueryable.Where(x => x.InStock);
+            }
 
-            await context.SaveChangesAsync();
+            if (toyFilterDTO.comingSoonToys)
+            {
+                var now = DateTime.Today;
+                toysQueryable = toysQueryable.Where(x => x.ComingSoonDate > now);
+            }
 
-            return NoContent();
+            if (toyFilterDTO.CategoryID != 0)
+            {
+                toysQueryable = toysQueryable
+                    .Where(x => x.ToysCategories.Select(y => y.CategoryId)
+                    .Contains(toyFilterDTO.CategoryID));
+            }
+
+            await HttpContext.InsertParameterPaginationInHeader(toysQueryable);
+
+            var toys = await toysQueryable.Paginate(toyFilterDTO.PaginationDTO).ToListAsync();
+
+            return mapper.Map<List<ToyDTO>>(toys);
         }
 
         [HttpGet("PostGet")]
@@ -98,6 +115,98 @@ namespace ToysStore.Controllers
             var categoryDTO = mapper.Map<List<CategoryDTO>>(categories);
 
             return new ToyPostGetDTO() { Branches = branchDTO, Categories = categoryDTO };
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<int>> Post([FromForm] ToyCreationDTO toyCreationDTO)
+        {
+            var toy = mapper.Map<Toy>(toyCreationDTO);
+
+            if (toyCreationDTO.Image != null)
+            {
+                toy.Image = await storageFiles.SaveFile(container, toyCreationDTO.Image);
+            }
+
+            OrderBrands(toy);
+
+            context.Add(toy);
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpGet("PutGet/{id:int}")]
+        public async Task<ActionResult<ToyPutGetDTO>> PutGet(int id)
+        {
+            var toyActionResult = await Get(id);
+            if (toyActionResult.Result is NotFoundResult) { return NotFound(); }
+
+            var toy = toyActionResult.Value;
+
+            var categoriesSelectedIds = toy.Categories.Select(x => x.Id).ToList();
+            var categoriesNotSelected = await context.categories
+                .Where(x => !categoriesSelectedIds.Contains(x.Id))
+                .ToListAsync();
+
+            var branchesSelectedIds = toy.Branches.Select(x => x.Id).ToList();
+            var branchesNotSelected = await context.branches
+                .Where(x => !branchesSelectedIds.Contains(x.Id))
+                .ToListAsync();
+
+            var categoriesNotSelectedDTO = mapper.Map<List<CategoryDTO>>(categoriesNotSelected);
+            var branchesNotSelectedDTO = mapper.Map<List<BranchDTO>>(branchesNotSelected);
+
+            var answer = new ToyPutGetDTO();
+            answer.Toy = toy;
+            answer.CategoriesSelected = toy.Categories;
+            answer.CategoriesNotSelected = categoriesNotSelectedDTO;
+            answer.BranchesSelected = toy.Branches;
+            answer.BranchesNotSelected = branchesNotSelectedDTO;
+            answer.Brands = toy.Brands;
+            return answer;
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Put(int id, [FromForm] ToyCreationDTO toyCreationDTO)
+        {
+            var toy = await context.toys
+                .Include(x => x.ToysBrands)
+                .Include(x => x.ToysCategories)
+                .Include(x => x.ToysBranches)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (toy == null)
+            {
+                return NotFound();
+            }
+
+            toy = mapper.Map(toyCreationDTO, toy);
+
+            if (toyCreationDTO.Image != null)
+            {
+                toy.Image = await storageFiles.EditFile(container, toyCreationDTO.Image, toy.Image);
+            }
+
+            OrderBrands(toy);
+
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var toy = await context.toys.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (toy == null)
+            {
+                return NotFound();
+            }
+
+            context.Remove(toy);
+            await context.SaveChangesAsync();
+            await storageFiles.DeleteFile(toy.Image, container);
+
+            return NoContent();
         }
 
         private void OrderBrands(Toy toy)

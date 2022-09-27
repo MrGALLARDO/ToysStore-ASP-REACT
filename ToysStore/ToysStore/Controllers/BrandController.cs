@@ -33,6 +33,19 @@ namespace ToysStore.Controllers
             return mapper.Map<List<BrandDTO>>(brands);
         }
 
+        [HttpGet("findByName/{name}")]
+        public async Task<List<ToyBrandDTO>> FindByName(string name = "")
+        {
+            if (string.IsNullOrWhiteSpace(name)) { return new List<ToyBrandDTO>(); }
+
+            return await context.brands
+                .Where(x => x.Name.Contains(name))
+                .OrderBy(x => x.Name)
+                .Select(x => new ToyBrandDTO { Id = x.Id, Name = x.Name, Image = x.Image })
+                .Take(5)
+                .ToListAsync();
+        }
+
         [HttpGet("{id:int}")]
         public async Task<ActionResult<BrandDTO>> Get(int id)
         {
@@ -44,19 +57,6 @@ namespace ToysStore.Controllers
             }
 
             return mapper.Map<BrandDTO>(brand);
-        }
-
-        [HttpGet("findByName/{name}")]
-        public async Task<List<ToyBrandDTO>> findByName(string name = "")
-        {
-            if (string.IsNullOrWhiteSpace(name)) { return new List<ToyBrandDTO>(); }
-
-            return await context.brands
-                .Where(x => x.Name.Contains(name))
-                .OrderBy(x => x.Name)
-                .Select(x => new ToyBrandDTO { Id = x.Id, Name = x.Name, Image = x.Image })
-                .Take(5)
-                .ToListAsync();
         }
 
         [HttpPost]

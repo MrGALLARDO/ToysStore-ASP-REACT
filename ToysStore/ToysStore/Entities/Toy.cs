@@ -23,17 +23,19 @@ namespace ToysStore.Controllers.Entities
         [Column(TypeName = "decimal(3,2)")]
         public decimal Price { get; set; }
 
+        public DateTime ComingSoonDate { get; set; }
+
         public DateTime RegisterDate { get; set; } = DateTime.Now;
 
         [StringLength(maximumLength: 50)]
-        public string? Review { get; set; }
+        public string Review { get; set; }
 
-        public string? Image { get; set; }
+        public string Image { get; set; }
 
-        public List<ToysBrands>? ToysBrands { get; set; }
+        public List<ToysBrands> ToysBrands { get; set; }
 
-        public List<ToysCategories>? ToysCategories { get; set; }
+        public List<ToysCategories> ToysCategories { get; set; }
 
-        public List<ToysBranches>? ToysBranches { get; set; }
+        public List<ToysBranches> ToysBranches { get; set; }
     }
 }

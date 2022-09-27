@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using ToysStore;
@@ -12,9 +13,10 @@ using ToysStore;
 namespace ToysStore.Migrations
 {
     [DbContext(typeof(AplicationDbContext))]
-    partial class AplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220926222724_toy")]
+    partial class toy
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,7 +40,7 @@ namespace ToysStore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("categories", (string)null);
+                    b.ToTable("categories");
                 });
 
             modelBuilder.Entity("ToysStore.Controllers.Entities.Toy", b =>
@@ -79,7 +81,7 @@ namespace ToysStore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("toys", (string)null);
+                    b.ToTable("toys");
                 });
 
             modelBuilder.Entity("ToysStore.Entities.Branch", b =>
@@ -100,7 +102,7 @@ namespace ToysStore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("branches", (string)null);
+                    b.ToTable("branches");
                 });
 
             modelBuilder.Entity("ToysStore.Entities.Brand", b =>
@@ -128,7 +130,7 @@ namespace ToysStore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("brands", (string)null);
+                    b.ToTable("brands");
                 });
 
             modelBuilder.Entity("ToysStore.Entities.ToysBranches", b =>
@@ -143,7 +145,7 @@ namespace ToysStore.Migrations
 
                     b.HasIndex("BranchId");
 
-                    b.ToTable("toysbranches", (string)null);
+                    b.ToTable("toysbranches");
                 });
 
             modelBuilder.Entity("ToysStore.Entities.ToysBrands", b =>
@@ -161,7 +163,7 @@ namespace ToysStore.Migrations
 
                     b.HasIndex("ToyId");
 
-                    b.ToTable("toysbrands", (string)null);
+                    b.ToTable("toysbrands");
                 });
 
             modelBuilder.Entity("ToysStore.Entities.ToysCategories", b =>
@@ -176,7 +178,7 @@ namespace ToysStore.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("toyscategories", (string)null);
+                    b.ToTable("toyscategories");
                 });
 
             modelBuilder.Entity("ToysStore.Entities.ToysBranches", b =>

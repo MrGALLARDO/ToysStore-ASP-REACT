@@ -15,7 +15,7 @@ export default function FormBrand(props: formBrandProps) {
       .max(50, "El nombre de la marca debe de tener menos de 50 caracteres.")
       .required("El nombre de la marca es requerido.")
       .firstCapitalLetter(),
-      releaseDate: Yup.date()
+      comingSoonDate: Yup.date()
       .required('La fecha de lanzamiento de la marca es requerida.')
       .max(new Date().toString(), 'La fecha de lanzamiento no debe ser mayor al día de hoy.')
   });
@@ -33,7 +33,7 @@ export default function FormBrand(props: formBrandProps) {
             label="Nombre de la Marca"
             placeholder="Nombre de la marca"
           />
-          <FormGroupDate field="releaseDate" label="Fecha Lanzamiento" />
+          <FormGroupDate field="comingSoonDate" label="Fecha Lanzamiento" />
           <FormGroupsImage field="image" label="Imagen" imageLink={props.model.imageLink} />
           <FormGroupMarkdown field="biography" label="Biografía" />
           <Button

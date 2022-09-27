@@ -13,6 +13,6 @@ namespace ToysStore.Entities
 
         public Point Ubication { get; set; }
 
-        public ICollection<ToysBranches> ToysBranches { get; set; }
+        public List<ToysBranches> ToysBranches { get; set; }
     }
 }

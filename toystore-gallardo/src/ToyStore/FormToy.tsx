@@ -15,6 +15,7 @@ import { branchDTO } from "../branch/branch.models";
 import TypeAheadBrand from "../brand/TypeAheadBrand";
 import { brandToyDTO } from "../brand/brands.model";
 import FormGroupNumber from "../utils/FormGroupMoney";
+import FormGroupDate from "../utils/FormGroupDate";
 
 export default function FormToys(props: FormToyProps) {
   const schemaToys = Yup.object().shape({
@@ -73,7 +74,7 @@ export default function FormToys(props: FormToyProps) {
       }}
       validationSchema={schemaToys}
     >
-      {({ errors, isSubmitting }) => (
+      {({ isSubmitting }) => (
         <Form>
           <FormGroupText
             field="name"
@@ -84,6 +85,8 @@ export default function FormToys(props: FormToyProps) {
           <FormGroupCheckbox label="En sucursal" field="inStock" />
           <FormGroupText label="Descripción" field={"description"} />
           <FormGroupNumber label="Precio:" field={"price"} />
+          <FormGroupDate field="CoomingSoonDate" label="Fecha Lanzamiento" />
+          
           <FormGroupText label="Review" field={"review"} />
           <FormGroupImage
             field="image"

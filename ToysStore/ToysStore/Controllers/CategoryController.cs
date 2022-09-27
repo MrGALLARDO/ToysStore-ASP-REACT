@@ -34,6 +34,13 @@ namespace ToysStore.Controllers
             return mapper.Map<List<CategoryDTO>>(categories);
         }
 
+        [HttpGet("all")]
+        public async Task<List<CategoryDTO>> All()
+        {
+            var categories = await context.categories.ToListAsync();
+            return mapper.Map<List<CategoryDTO>>(categories);
+        }
+
         [HttpGet("{Id:int}")]
         public async Task<ActionResult<CategoryDTO>> Get(int Id)
         {

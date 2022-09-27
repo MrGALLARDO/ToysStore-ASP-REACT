@@ -11,7 +11,7 @@ export default function EditBrand() {
       name: brand.name,
       imageLink: brand.image,
       biography: brand.biography,
-      releaseDate: brand.releaseDate
+      comingSoonDate: brand.comingSoonDate
     }
   }
   

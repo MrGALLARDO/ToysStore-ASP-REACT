@@ -14,7 +14,9 @@ namespace ToysStore.DTOs
 
         public bool InStock { get; set; }
 
-        public DateTime registerDate { get; set; }
+        public DateTime comingSoonDate { get; set; }
+
+        public DateTime RegisterDate { get; set; }
 
         [StringLength(maximumLength: 100)]
         public string? Review { get; set; }

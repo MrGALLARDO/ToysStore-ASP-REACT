@@ -53,9 +53,9 @@ namespace ToysStore.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(int id, [FromBody] BranchCreationDTO branchCreationDTO)
+        public async Task<ActionResult> Put(int Id, [FromBody] BranchCreationDTO branchCreationDTO)
         {
-            var branch = await context.branches.FirstOrDefaultAsync(x => x.Id == id);
+            var branch = await context.branches.FirstOrDefaultAsync(x => x.Id == Id);
 
             if (branch == null)
             {
@@ -80,6 +80,7 @@ namespace ToysStore.Controllers
             }
 
             context.Remove(new Branch() { Id = id });
+            await context.SaveChangesAsync();
             return NoContent();
         }
     }
