@@ -126,7 +126,7 @@ export default function FilterToy() {
                 <div className="form-group mx-sm-3 mb-2">
                   <select
                     className="form-control"
-                    {...getFieldProps("idCategory")}
+                    {...getFieldProps("categoryId")}
                   >
                     <option value="0">--Selecciona una Categoria--</option>
                     {categories.map((category) => (
