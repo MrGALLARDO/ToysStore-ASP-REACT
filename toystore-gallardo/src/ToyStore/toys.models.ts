@@ -6,7 +6,7 @@ import { CategoryDTO } from "../categories/category.model";
 export interface toyDTO {
   id: number;
   name: string;
-  description: string;
+  description?: string;
   inStock: boolean;
   price: number;
   review: string;
@@ -19,9 +19,9 @@ export interface toyDTO {
 
 export interface toyCreationDTO {
   name: string;
-  inStock: boolean;
-  description: string;
-  price: number;
+  inStock?: boolean;
+  description?: string;
+  price?: number;
   comingSoonDate?: Date;
   image?: File;
   imageLink?: string;
@@ -41,4 +41,13 @@ export interface toyPostGetDTO{
   toy: toyDTO;
   categories:  CategoryDTO[];
   branches : branchDTO[];
+}
+
+export interface toyPutGetDTO {
+  toy: toyDTO;
+  categoriesSelected: CategoryDTO[];
+  categoriesNotSelected: CategoryDTO[];
+  branchesSelected: branchDTO[];
+  branchesNotSelected: branchDTO[];
+  brands: brandToyDTO[];
 }

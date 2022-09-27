@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { useState } from "react";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
 import { ReactElement } from "react-markdown/lib/react-markdown";
-import { urlBrands } from "../endpoints";
+import { urlBrands } from "../utils/endpoints";
 import { brandToyDTO } from "./brands.model";
 
 export default function TypeAheadbrand(props: typeAheadbrandProps) {

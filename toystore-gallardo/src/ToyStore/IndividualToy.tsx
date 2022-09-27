@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Button from "../utils/Buttons";
 import Confirm from "../utils/Confirm";
 import axios from "axios";
-import { urlToys } from "../endpoints";
+import { urlToys } from "../utils/endpoints";
 import { useContext } from "react";
 import AlertContext from "../utils/AlertContext";
 

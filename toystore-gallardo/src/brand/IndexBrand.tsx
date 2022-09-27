@@ -1,5 +1,5 @@
 import { brandDTO } from "../brand/brands.model";
-import { urlBrands } from "../endpoints";
+import { urlBrands } from "../utils/endpoints";
 import IndexEntity from "../utils/IndexEntity";
 
 export default function IndexBrand() {

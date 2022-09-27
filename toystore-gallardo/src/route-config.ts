@@ -21,7 +21,6 @@ const routes = [
     {path:'/category/create', element : CreateCategory},
     {path:'/category/edit/:id', element :EditCategory},
     {path:'/category', element : IndexCategory},
-    {path:'/', element: LandingPage},
 
     {path:'/brand/create', element : CreateBrand},
     {path:'/brand/edit/:id', element : EditBrand},
@@ -32,10 +31,11 @@ const routes = [
     {path:'/branch', element : IndexBranch},
 
     {path:'/toy/:id', element : DetailToy},
-
     {path:'/toy/create', element : CreateToy},
     {path:'/toy/edit/:id', element : EditToy},
     {path:'/toy/filter', element : FilterToy},
+
+    {path:'/', element: LandingPage},
     {path:'*', element : RedirectLanding},
 ];
 

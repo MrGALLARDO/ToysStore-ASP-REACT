@@ -1,4 +1,4 @@
-import { urlCategories } from "../endpoints";
+import { urlCategories } from "../utils/endpoints";
 import IndexEntity from "../utils/IndexEntity";
 import { CategoryDTO } from "./category.model";
 

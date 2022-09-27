@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Link, useParams } from "react-router-dom";
-import { urlToys } from "../endpoints";
+import { urlToys } from "../utils/endpoints";
 import { coordinateDTO } from "../utils/coordinates.model";
 import Loading from "../utils/Loading";
 import MapLeaflet from "../utils/Map";
@@ -13,7 +13,8 @@ export default function DetallePelicula() {
   const [toy, setPelicula] = useState<toyDTO>();
 
   useEffect(() => {
-    axios.get(`${urlToys}/${id}`).then((answer: AxiosResponse<toyDTO>) => {
+    axios.get(`${urlToys}/${id}`)
+    .then((answer: AxiosResponse<toyDTO>) => {
       answer.data.comingSoonDate = new Date(answer.data.comingSoonDate);
       setPelicula(answer.data);
     });
@@ -59,7 +60,7 @@ export default function DetallePelicula() {
             key={category.id}
             style={{ marginRight: "5px" }}
             className="btn btn-primary btn-sm rounded-pill"
-            to={`/peliculas/filtrar?generoId=${category.id}`}
+            to={`/toy/filter?categoryId=${category.id}`}
           >
             {category.name}
           </Link>

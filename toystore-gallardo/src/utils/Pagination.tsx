@@ -22,7 +22,8 @@ export default function Pagination(props: paginationProps) {
                 links.push({
                     text: `${i}`,
                     active: props.currentPage === i,
-                    enabled: true, page: i
+                    enabled: true, 
+                    page: i
                 })
             }
         }
@@ -65,16 +66,19 @@ export default function Pagination(props: paginationProps) {
 
     return (
         <nav>
-            <ul className="pagination justify-content-center">
-                {listLinks.map(link => <li key={link.text}
-                 onClick={() => selectPage(link)}
-                 className={`page-item cursor ${obtainClass(link)}`}
-                >
-                    <span className="page-link">{link.text}</span>
-                </li>)}
-            </ul>
-        </nav>
-    )
+      <ul className="pagination justify-content-center">
+        {listLinks.map((link) => (
+          <li
+            key={link.text}
+            onClick={() => selectPage(link)}
+            className={`page-item cursor ${obtainClass(link)}`}
+          >
+            <span className="page-link">{link.text}</span>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    );
 }
 
 interface modelLink {

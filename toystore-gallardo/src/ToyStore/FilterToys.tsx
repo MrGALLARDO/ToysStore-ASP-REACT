@@ -3,7 +3,7 @@ import { Formik, Form, Field } from "formik";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CategoryDTO } from "../categories/category.model";
-import { urlCategories, urlToys } from "../endpoints";
+import { urlCategories, urlToys } from "../utils/endpoints";
 import Button from "../utils/Buttons";
 import Pagination from "../utils/Pagination";
 import ListToys from "./ListToys";

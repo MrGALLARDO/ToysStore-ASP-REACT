@@ -15,9 +15,13 @@ export interface brandCreationDTO {
 }
 
 export interface brandToyDTO {
+  brands: brandToyDTO[];
+  branchesSelected: branchDTO[];
+  branchesNotSelected: branchDTO[];
+  categoriesNotSelected: CategoryDTO[];
+  categoriesSelected: CategoryDTO[];
   id: number;
   name: string;
-  // website: string;
   image: string;
 }
 

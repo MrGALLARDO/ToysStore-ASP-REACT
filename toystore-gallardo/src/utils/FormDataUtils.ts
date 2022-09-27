@@ -26,14 +26,13 @@ export function convertToyToFormData(toy: toyCreationDTO): FormData {
 
     formData.append('name', toy.name);
 
-    // if (toy.resumen){
-    //     formData.append('resumen', toy.resumen);
-    // }
+    if (toy.description){
+        formData.append('description', toy.description);
+    }
 
-    formData.append('description', toy.description);
     formData.append('inStock', String(toy.inStock));
     if (toy.comingSoonDate){
-        formData.append("comingsoondate", formatDate(toy.comingSoonDate));
+        formData.append("comingSoonDate", formatDate(toy.comingSoonDate));
     }
 
     if (toy.image){

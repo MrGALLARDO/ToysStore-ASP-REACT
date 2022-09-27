@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { useState, useEffect } from "react";
-import { urlToys } from "./endpoints";
+import { urlToys } from "./utils/endpoints";
 import ListToys from "./ToyStore/ListToys";
 import { landingPageDTO } from "./ToyStore/toys.models";
 import AlertContext from "./utils/AlertContext";

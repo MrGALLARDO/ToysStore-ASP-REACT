@@ -18,25 +18,21 @@ export default function EditEntity<TCreation, TLecture>(
       setEntity(props.transform(answer.data));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
+  }, []);
 
   async function edit(entityEdit: TCreation) {
     try {
-
-      if (props.transformFormData){
-
+      if (props.transformFormData) {
         const formData = props.transformFormData(entityEdit);
         await axios({
-          method: 'put',
+          method: "put",
           url: `${props.url}/${id}`,
           data: formData,
-          headers:{'Content-Type': 'multipart/form-data'}
+          headers: { "Content-Type": "multipart/form-data" },
         });
-
       } else {
         await axios.put(`${props.url}/${id}`, entityEdit);
       }
-
       navigate(props.urlIndex);
     } catch (error) {
       setErrors(error.response.data);
@@ -47,7 +43,7 @@ export default function EditEntity<TCreation, TLecture>(
     <>
       <h3>Editar {props.nameEntity}</h3>
       <ShowErrors errors={errors} />
-      {entity ? props.children(entity,edit): <Loading/>}
+      {entity ? props.children(entity, edit) : <Loading />}
     </>
   );
 }
@@ -62,5 +58,5 @@ interface editEntityProps<TCreation, TLecture> {
 }
 
 EditEntity.defaultProps = {
-    transform: (entity: any) => entity
-}
+  transform: (entity: any) => entity,
+};

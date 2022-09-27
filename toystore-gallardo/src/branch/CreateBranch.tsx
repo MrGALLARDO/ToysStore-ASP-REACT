@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { urlBranches } from "../endpoints";
+import { urlBranches } from "../utils/endpoints";
 import ShowErrors from "../utils/ShowErrors";
 import { branchCreationDTO } from "./branch.models";
 import FormBranch from "./FormBranch";

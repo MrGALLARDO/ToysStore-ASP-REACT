@@ -1,4 +1,4 @@
-import { urlCategories } from "../endpoints";
+import { urlCategories } from "../utils/endpoints";
 import EditEntity from "../utils/EditEntity";
 import { CategoryCreationDTO, CategoryDTO } from "./category.model";
 import FormCategory from "./FormCategory";

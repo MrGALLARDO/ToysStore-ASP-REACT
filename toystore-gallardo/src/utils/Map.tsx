@@ -1,16 +1,12 @@
-import {
-  MapContainer,
-  Marker,
-  Popup,
-  TileLayer,
-  useMapEvent,
-} from "react-leaflet";
-import L from "leaflet";
-import icon from "leaflet/dist/images/marker-icon.png";
-import iconShadow from "leaflet/dist/images/marker-shadow.png";
+import { MapContainer, Marker, Popup, TileLayer, useMapEvent } from 'react-leaflet';
+import L from 'leaflet';
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png'
+import 'leaflet/dist/leaflet.css';
 import "leaflet/dist/leaflet.css";
 import { useState } from "react";
 import { coordinateDTO } from "./coordinates.model";
+
 
 let DefaultIcon = L.icon({
   iconUrl: icon,
@@ -21,22 +17,25 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 export default function MapLeaflet(props: mapLeafletProps) {
-  const [coordinates, setcoordinates] = useState<coordinateDTO[]>(
+  
+  const [coordinates, setCoordinates] = useState<coordinateDTO[]>(
     props.coordinates
   );
+  
   return (
     <MapContainer
       center={[20.673406871094812, -103.36769374681671]}
+      zoom={14}
       style={{ height: props.height }}
     >
       <TileLayer
-        attribution="Juguetes"
+        attribution='React Películas'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {props.onlyRead ? null : (
         <ClickMap
           setPoint={(coordinates) => {
-            setcoordinates([coordinates]);
+            setCoordinates([coordinates]);
             props.manageClickMap(coordinates);
           }}
         />
@@ -64,9 +63,9 @@ MapLeaflet.defaultProps = {
 
 // Evento click mapa para el Marcador.
 function ClickMap(props: clickMapProps) {
-  useMapEvent("click", (e) => {
+  useMapEvent('click', e => {
     props.setPoint({ lat: e.latlng.lat, lng: e.latlng.lng });
-  });
+  })
   return null;
 }
 

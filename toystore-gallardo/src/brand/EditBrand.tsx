@@ -1,4 +1,4 @@
-import { urlBrands } from "../endpoints";
+import { urlBrands } from "../utils/endpoints";
 import EditEntity from "../utils/EditEntity";
 import { convertBrandToFormData } from "../utils/FormDataUtils";
 import { brandCreationDTO, brandDTO } from "./brands.model";

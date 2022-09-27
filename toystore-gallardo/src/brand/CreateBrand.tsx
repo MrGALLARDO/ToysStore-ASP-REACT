@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { urlBrands } from "../endpoints";
+import { urlBrands } from "../utils/endpoints";
 import { convertBrandToFormData } from "../utils/FormDataUtils";
 import ShowErrors from "../utils/ShowErrors";
 import { brandCreationDTO } from "./brands.model";

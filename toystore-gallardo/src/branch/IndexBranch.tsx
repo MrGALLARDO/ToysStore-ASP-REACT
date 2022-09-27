@@ -1,4 +1,4 @@
-import { urlBranches } from "../endpoints";
+import { urlBranches } from "../utils/endpoints";
 import IndexEntity from "../utils/IndexEntity";
 import { branchDTO } from "./branch.models";
 
