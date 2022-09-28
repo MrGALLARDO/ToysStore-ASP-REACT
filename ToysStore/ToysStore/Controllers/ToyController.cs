@@ -131,7 +131,14 @@ namespace ToysStore.Controllers
             OrderBrands(toy);
 
             context.Add(toy);
-            await context.SaveChangesAsync();
+            try
+            {
+                await context.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
             return toy.Id;
         }
 
