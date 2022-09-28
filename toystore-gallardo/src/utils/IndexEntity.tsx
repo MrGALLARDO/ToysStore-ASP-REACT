@@ -32,7 +32,7 @@ export default function IndexEntity<T>(props: indexEntityProps<T>) {
       });
   }
 
-  async function deleteCategory(id: number) {
+  async function deleteEntity(id: number) {
     try {
       await axios.delete(`${props.url}/${id}`);
       chargeData();
@@ -47,7 +47,7 @@ export default function IndexEntity<T>(props: indexEntityProps<T>) {
         Editar
       </Link>
       <Button
-        onClick={() => confirm(() => deleteCategory(id))}
+        onClick={() => confirm(() => deleteEntity(id))}
         className="btn btn-danger"
       >
         Borrar

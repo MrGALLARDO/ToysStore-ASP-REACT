@@ -10,13 +10,12 @@ import { toyDTO } from "./toys.models";
 
 export default function DetallePelicula() {
   const { id }: any = useParams();
-  const [toy, setPelicula] = useState<toyDTO>();
+  const [toy, setToy] = useState<toyDTO>();
 
   useEffect(() => {
-    axios.get(`${urlToys}/${id}`)
-    .then((answer: AxiosResponse<toyDTO>) => {
+    axios.get(`${urlToys}/${id}`).then((answer: AxiosResponse<toyDTO>) => {
       answer.data.comingSoonDate = new Date(answer.data.comingSoonDate);
-      setPelicula(answer.data);
+      setToy(answer.data);
     });
   }, [id]);
 

@@ -85,7 +85,7 @@ export default function FormToys(props: FormToyProps) {
           <FormGroupCheckbox label="En sucursal" field="inStock" />
           <FormGroupText label="Descripción" field={"description"} />
           <FormGroupNumber label="Precio:" field={"price"} />
-          <FormGroupDate field="CoomingSoonDate" label="Fecha Lanzamiento" />
+          <FormGroupDate label="Fecha Lanzamiento" field="CoomingSoonDate" />
           
           <FormGroupText label="Review" field={"review"} />
           <FormGroupImage
@@ -146,7 +146,8 @@ export default function FormToys(props: FormToyProps) {
                       brands[index].website = e.currentTarget.value;
                       setBrandsSelected(brands);
                     }}
-                  /> */}
+                  /> */
+                  }
                 </>
               )
             }

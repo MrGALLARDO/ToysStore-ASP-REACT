@@ -15,7 +15,7 @@ namespace ToysStore.Controllers
         private readonly AplicationDbContext context;
         private readonly IMapper mapper;
         private readonly IStorageFiles storageFiles;
-        private readonly string container = "toy";
+        private readonly string container = "toys";
 
         public ToyController(AplicationDbContext context,
            IMapper mapper,
@@ -44,11 +44,12 @@ namespace ToysStore.Controllers
                 .Take(top)
                 .ToListAsync();
 
-            var result = new LandingPageDTO();
+            var result = new LandingPageDTO
+            {
+                ComingSoonToys = mapper.Map<List<ToyDTO>>(comingSoonToys),
 
-            result.ComingSoonToys = mapper.Map<List<ToyDTO>>(comingSoonToys);
-
-            result.InStock = mapper.Map<List<ToyDTO>>(inStock);
+                InStock = mapper.Map<List<ToyDTO>>(inStock)
+            };
 
             return result;
         }
@@ -85,7 +86,7 @@ namespace ToysStore.Controllers
                 toysQueryable = toysQueryable.Where(x => x.InStock);
             }
 
-            if (toyFilterDTO.comingSoonToys)
+            if (toyFilterDTO.ComingSoonToys)
             {
                 var now = DateTime.Today;
                 toysQueryable = toysQueryable.Where(x => x.ComingSoonDate > now);
@@ -131,7 +132,7 @@ namespace ToysStore.Controllers
 
             context.Add(toy);
             await context.SaveChangesAsync();
-            return NoContent();
+            return toy.Id;
         }
 
         [HttpGet("PutGet/{id:int}")]
@@ -155,13 +156,15 @@ namespace ToysStore.Controllers
             var categoriesNotSelectedDTO = mapper.Map<List<CategoryDTO>>(categoriesNotSelected);
             var branchesNotSelectedDTO = mapper.Map<List<BranchDTO>>(branchesNotSelected);
 
-            var answer = new ToyPutGetDTO();
-            answer.Toy = toy;
-            answer.CategoriesSelected = toy.Categories;
-            answer.CategoriesNotSelected = categoriesNotSelectedDTO;
-            answer.BranchesSelected = toy.Branches;
-            answer.BranchesNotSelected = branchesNotSelectedDTO;
-            answer.Brands = toy.Brands;
+            var answer = new ToyPutGetDTO
+            {
+                Toy = toy,
+                CategoriesSelected = toy.Categories,
+                CategoriesNotSelected = categoriesNotSelectedDTO,
+                BranchesSelected = toy.Branches,
+                BranchesNotSelected = branchesNotSelectedDTO,
+                Brands = toy.Brands
+            };
             return answer;
         }
 
@@ -209,7 +212,7 @@ namespace ToysStore.Controllers
             return NoContent();
         }
 
-        private void OrderBrands(Toy toy)
+        private static void OrderBrands(Toy toy)
         {
             if (toy.ToysBrands != null)
             {

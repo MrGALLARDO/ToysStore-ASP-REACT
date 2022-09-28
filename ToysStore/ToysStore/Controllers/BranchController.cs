@@ -9,12 +9,12 @@ namespace ToysStore.Controllers
 {
     [ApiController]
     [Route("api/branch")]
-    public class branchController : ControllerBase
+    public class BranchController : ControllerBase
     {
         private readonly AplicationDbContext context;
         private readonly IMapper mapper;
 
-        public branchController(AplicationDbContext context,
+        public BranchController(AplicationDbContext context,
             IMapper mapper)
         {
             this.context = context;

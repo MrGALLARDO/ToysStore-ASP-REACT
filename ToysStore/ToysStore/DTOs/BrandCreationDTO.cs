@@ -11,8 +11,6 @@ namespace ToysStore.DTOs
         [StringLength(maximumLength: 100)]
         public string Biography { get; set; }
 
-        public DateTime ReleaseYear { get; set; }
-
         public IFormFile Image { get; set; }
     }
 }

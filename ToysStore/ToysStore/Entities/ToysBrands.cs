@@ -12,8 +12,6 @@ namespace ToysStore.Entities
 
         public Brand Brand { get; set; }
 
-        //public string Website { get; set; }
-
         public int Order { get; set; }
     }
 }

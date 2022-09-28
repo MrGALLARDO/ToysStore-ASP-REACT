@@ -8,8 +8,6 @@
 
         public string Biography { get; set; }
 
-        public DateTime ReleaseYear { get; set; }
-
         public string Image { get; set; }
     }
 }

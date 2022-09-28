@@ -13,10 +13,8 @@ namespace ToysStore.Entities
         [StringLength(maximumLength: 100)]
         public string Biography { get; set; }
 
-        public DateTime ReleaseYear { get; set; }
-
         public string Image { get; set; }
 
-        public ICollection<ToysBrands> ToysBrands { get; set; }
+        public List<ToysBrands> ToysBrands { get; set; }
     }
 }

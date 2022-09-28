@@ -29,9 +29,7 @@ export default function CreateBranch() {
       <ShowErrors errors={errors}/>
       <FormBranch
         model={{
-          name: "",
-          latitude: 0,
-          longitude: 0,
+          name: ""
         }}
         onSubmit={async values => await create(values)}
       />

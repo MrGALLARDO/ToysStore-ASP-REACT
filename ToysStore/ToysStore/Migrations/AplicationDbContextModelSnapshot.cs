@@ -38,7 +38,7 @@ namespace ToysStore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("categories", (string)null);
+                    b.ToTable("categories");
                 });
 
             modelBuilder.Entity("ToysStore.Controllers.Entities.Toy", b =>
@@ -79,7 +79,7 @@ namespace ToysStore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("toys", (string)null);
+                    b.ToTable("toys");
                 });
 
             modelBuilder.Entity("ToysStore.Entities.Branch", b =>
@@ -100,7 +100,7 @@ namespace ToysStore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("branches", (string)null);
+                    b.ToTable("branches");
                 });
 
             modelBuilder.Entity("ToysStore.Entities.Brand", b =>
@@ -123,12 +123,9 @@ namespace ToysStore.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime>("ReleaseYear")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
 
-                    b.ToTable("brands", (string)null);
+                    b.ToTable("brands");
                 });
 
             modelBuilder.Entity("ToysStore.Entities.ToysBranches", b =>
@@ -143,7 +140,7 @@ namespace ToysStore.Migrations
 
                     b.HasIndex("BranchId");
 
-                    b.ToTable("toysbranches", (string)null);
+                    b.ToTable("toysbranches");
                 });
 
             modelBuilder.Entity("ToysStore.Entities.ToysBrands", b =>
@@ -161,7 +158,7 @@ namespace ToysStore.Migrations
 
                     b.HasIndex("ToyId");
 
-                    b.ToTable("toysbrands", (string)null);
+                    b.ToTable("toysbrands");
                 });
 
             modelBuilder.Entity("ToysStore.Entities.ToysCategories", b =>
@@ -176,7 +173,7 @@ namespace ToysStore.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("toyscategories", (string)null);
+                    b.ToTable("toyscategories");
                 });
 
             modelBuilder.Entity("ToysStore.Entities.ToysBranches", b =>

@@ -21,7 +21,7 @@ export default function FilterToy() {
 
   const [categories, setCategories] = useState<CategoryDTO[]>([]);
   const [toys, setToys] = useState<toyDTO[]>([]);
-  const [totalPages, setRecordsPerPages] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
   const navigate = useNavigate();
   const query = new URLSearchParams(useLocation().search);
 
@@ -67,9 +67,7 @@ export default function FilterToy() {
           answer.headers["quantityTotalRegisters"],
           10
         );
-        setRecordsPerPages(
-          Math.ceil(totalRegisters / valueInit.recordsPerPage)
-        );
+        setTotalPages(Math.ceil(totalRegisters / valueInit.recordsPerPage));
 
         setToys(answer.data);
       });
@@ -101,11 +99,12 @@ export default function FilterToy() {
   return (
     <>
       <h3>Filtro Juguetes</h3>
-      <Formik initialValues={valueInit} 
-      onSubmit={values => {
-        values.page = 1;
-        findToys(values)
-      }}
+      <Formik
+        initialValues={valueInit}
+        onSubmit={(values) => {
+          values.page = 1;
+          findToys(values);
+        }}
       >
         {({ submitForm, getFieldProps, setValues, values }) => (
           <>

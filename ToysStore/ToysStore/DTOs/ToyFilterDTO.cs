@@ -13,6 +13,6 @@
         public string Name { get; set; }
         public int CategoryID { get; set; }
         public bool InStock { get; set; }
-        public bool comingSoonToys { get; set; }
+        public bool ComingSoonToys { get; set; }
     }
 }

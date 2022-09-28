@@ -10,10 +10,6 @@ export function convertBrandToFormData(brand: brandCreationDTO): FormData{
         formData.append('biography', brand.biography);
     }
 
-    if (brand.comingSoonDate){
-        formData.append("comingSoonDate", formatDate(brand.comingSoonDate));
-    }
-
     if (brand.image){
         formData.append("image", brand.image);
     }
@@ -30,7 +26,10 @@ export function convertToyToFormData(toy: toyCreationDTO): FormData {
         formData.append('description', toy.description);
     }
 
+    formData.append('price',String(toy.price));
+
     formData.append('inStock', String(toy.inStock));
+    
     if (toy.comingSoonDate){
         formData.append("comingSoonDate", formatDate(toy.comingSoonDate));
     }

@@ -39,9 +39,9 @@ export default function CreateToy() {
         url: urlToys,
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
-      }).then((answer: AxiosResponse<number>) =>
-        navigation(`/toy/${answer.data}`)
-      );
+      }).then((answer: AxiosResponse<number>) => {
+        navigation(`/toy/${answer.data}`);
+      });
     } catch (error) {
       setErrors(error.response.data);
     }
@@ -51,7 +51,7 @@ export default function CreateToy() {
     <>
       <h3>Crear Juguete</h3>
       <ShowErrors errors={errors} />
-      {loaded ? (
+      {loaded ? 
         <FormToys
           brandsSelected={[]}
           branchesNotSelected={branchesNotSelected}
@@ -65,9 +65,9 @@ export default function CreateToy() {
             price: 0,
             review: "",
           }}
-          onSubmit={async (values) => create(values)}
+          onSubmit={async values => create(values)}
         />
-      ) : (
+       : (
         <Loading />
       )}
     </>

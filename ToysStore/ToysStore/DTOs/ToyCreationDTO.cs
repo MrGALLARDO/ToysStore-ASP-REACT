@@ -12,14 +12,16 @@ namespace ToysStore.DTOs
         [StringLength(maximumLength: 50)]
         public string Description { get; set; }
 
-        public bool InStock { get; set; }
-
-        public DateTime comingSoonDate { get; set; }
-
-        public DateTime RegisterDate { get; set; }
-
         [StringLength(maximumLength: 100)]
         public string? Review { get; set; }
+
+        public bool InStock { get; set; }
+
+        public decimal Price { get; set; }
+
+        public DateTime ComingSoonDate { get; set; }
+
+        public DateTime RegisterDate { get; set; }
 
         public IFormFile Image { get; set; }
 
