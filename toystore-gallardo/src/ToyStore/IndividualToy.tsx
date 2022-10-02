@@ -7,17 +7,17 @@ import axios from "axios";
 import { urlToys } from "../utils/endpoints";
 import { useContext } from "react";
 import AlertContext from "../utils/AlertContext";
+import Autorizate from "../auth/Autorizate";
 
 export default function IndividualToy(props: individualToyProps) {
   // Construcción del Link.
   const buildLink = () => `/toy/${props.toy.id}`;
   const alerts = useContext(AlertContext);
 
-  function DeleteToy(){
-    axios.delete(`${urlToys}/${props.toy.id}`)
-    .then(() => {
+  function DeleteToy() {
+    axios.delete(`${urlToys}/${props.toy.id}`).then(() => {
       alerts();
-    })
+    });
   }
 
   return (
@@ -28,21 +28,26 @@ export default function IndividualToy(props: individualToyProps) {
       <p>
         <a href={buildLink()}>{props.toy.name}</a>
       </p>
-
-      <div>
-        <Link 
-          style={{marginRight: '1rem'}}
-          className="btn btn-info"
-          to={`/toy/edit/${props.toy.id}`}
-        >
-          Editar
-        </Link>
-        <Button 
-        onClick={()=>Confirm(() => DeleteToy())}
-        className="btn btn-danger">
-          Borrar
-        </Button>
-      </div>
+      <Autorizate
+        role="admin"
+        autorizate={
+          <div>
+            <Link
+              style={{ marginRight: "1rem" }}
+              className="btn btn-info"
+              to={`/toy/edit/${props.toy.id}`}
+            >
+              Editar
+            </Link>
+            <Button
+              onClick={() => Confirm(() => DeleteToy())}
+              className="btn btn-danger"
+            >
+              Borrar
+            </Button>
+          </div>
+        }
+      />
     </div>
   );
 }

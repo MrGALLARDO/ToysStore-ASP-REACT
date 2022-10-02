@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-export default function ConfigureValidations() {
+export default function configureValidations() {
   Yup.addMethod(Yup.string, "firstCapitalLetter", function () {
     return this.test(
       "first-capital-letter",

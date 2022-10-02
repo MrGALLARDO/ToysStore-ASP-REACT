@@ -24,17 +24,17 @@ namespace ToysStore
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<Category> categories { get; set; }
-        public DbSet<Brand> brands { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Brand> Brands { get; set; }
 
-        public DbSet<Branch> branches { get; set; }
+        public DbSet<Branch> Branches { get; set; }
 
-        public DbSet<Toy> toys { get; set; }
+        public DbSet<Toy> Toys { get; set; }
 
-        public DbSet<ToysBrands> toysbrands { get; set; }
+        public DbSet<ToysBrands> Toysbrands { get; set; }
 
-        public DbSet<ToysCategories> toyscategories { get; set; }
+        public DbSet<ToysCategories> Toyscategories { get; set; }
 
-        public DbSet<ToysBranches> toysbranches { get; set; }
+        public DbSet<ToysBranches> Toysbranches { get; set; }
     }
 }

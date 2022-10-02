@@ -130,7 +130,7 @@ export default function FilterToy() {
                     <option value="0">--Selecciona una Categoria--</option>
                     {categories.map((category) => (
                       <option key={category.id} value={category.id}>
-                        {category.name}{" "}
+                        {category.name}
                       </option>
                     ))}
                   </select>

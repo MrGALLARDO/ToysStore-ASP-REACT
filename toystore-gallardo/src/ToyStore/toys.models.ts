@@ -15,11 +15,13 @@ export interface toyDTO {
   categories: CategoryDTO[];
   branches: branchDTO[];
   brands: brandToyDTO[];
+  voteUser?: number;
+  averageVote?: number;
 }
 
 export interface toyCreationDTO {
   name: string;
-  inStock?: boolean;
+  inStock: boolean;
   description?: string;
   price?: number;
   comingSoonDate?: Date;
@@ -34,11 +36,10 @@ export interface toyCreationDTO {
 // Interfaz de estado.
 export interface landingPageDTO {
    inStock?: toyDTO[];
-   nextToys?: toyDTO[];
+   comingSoonToys?: toyDTO[];
 }
 
 export interface toyPostGetDTO{
-  toy: toyDTO;
   categories:  CategoryDTO[];
   branches : branchDTO[];
 }

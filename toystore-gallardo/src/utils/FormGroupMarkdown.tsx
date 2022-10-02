@@ -14,7 +14,7 @@ export default function FormGroupMarkdown(props: FormGroupMarkdownProps) {
                 </div>
             </div>
             <div>
-                <label htmlFor={props.label}></label>
+                <label>{props.label} (preview):</label>
                 <div className="markdown-container">
                     <ReactMarkdown>{values[props.field]}</ReactMarkdown>
                 </div>

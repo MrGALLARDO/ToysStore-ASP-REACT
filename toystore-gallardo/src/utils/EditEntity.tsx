@@ -58,5 +58,5 @@ interface editEntityProps<TCreation, TLecture> {
 }
 
 EditEntity.defaultProps = {
-  transform: (entity: any) => entity,
+  transform: (entity: any) => entity
 };

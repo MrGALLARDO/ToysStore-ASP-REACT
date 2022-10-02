@@ -32,13 +32,13 @@ namespace ToysStore.Controllers
             var top = 6;
             var now = DateTime.Today;
 
-            var comingSoonToys = await context.toys
+            var comingSoonToys = await context.Toys
                 .Where(x => x.ComingSoonDate > now)
                 .OrderBy(x => x.ComingSoonDate)
                 .Take(top)
                 .ToListAsync();
 
-            var inStock = await context.toys
+            var inStock = await context.Toys
                 .Where(x => x.InStock)
                 .OrderBy(x => x.ComingSoonDate)
                 .Take(top)
@@ -57,7 +57,7 @@ namespace ToysStore.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<ToyDTO>> Get(int id)
         {
-            Toy toy = await context.toys
+            Toy toy = await context.Toys
             .Include(x => x.ToysCategories).ThenInclude(x => x.category)
             .Include(x => x.ToysBrands).ThenInclude(x => x.Brand)
             .Include(x => x.ToysBranches).ThenInclude(x => x.Branch)
@@ -74,7 +74,7 @@ namespace ToysStore.Controllers
         [HttpGet("filter")]
         public async Task<ActionResult<List<ToyDTO>>> Filter([FromQuery] ToyFilterDTO toyFilterDTO)
         {
-            var toysQueryable = context.toys.AsQueryable();
+            var toysQueryable = context.Toys.AsQueryable();
 
             if (!string.IsNullOrEmpty(toyFilterDTO.Name))
             {
@@ -109,8 +109,8 @@ namespace ToysStore.Controllers
         [HttpGet("PostGet")]
         public async Task<ActionResult<ToyPostGetDTO>> PostGet()
         {
-            var branches = await context.branches.ToListAsync();
-            var categories = await context.categories.ToListAsync();
+            var branches = await context.Branches.ToListAsync();
+            var categories = await context.Categories.ToListAsync();
 
             var branchDTO = mapper.Map<List<BranchDTO>>(branches);
             var categoryDTO = mapper.Map<List<CategoryDTO>>(categories);
@@ -151,12 +151,12 @@ namespace ToysStore.Controllers
             var toy = toyActionResult.Value;
 
             var categoriesSelectedIds = toy.Categories.Select(x => x.Id).ToList();
-            var categoriesNotSelected = await context.categories
+            var categoriesNotSelected = await context.Categories
                 .Where(x => !categoriesSelectedIds.Contains(x.Id))
                 .ToListAsync();
 
             var branchesSelectedIds = toy.Branches.Select(x => x.Id).ToList();
-            var branchesNotSelected = await context.branches
+            var branchesNotSelected = await context.Branches
                 .Where(x => !branchesSelectedIds.Contains(x.Id))
                 .ToListAsync();
 
@@ -178,7 +178,7 @@ namespace ToysStore.Controllers
         [HttpPut("{id:int}")]
         public async Task<ActionResult> Put(int id, [FromForm] ToyCreationDTO toyCreationDTO)
         {
-            var toy = await context.toys
+            var toy = await context.Toys
                 .Include(x => x.ToysBrands)
                 .Include(x => x.ToysCategories)
                 .Include(x => x.ToysBranches)
@@ -205,7 +205,7 @@ namespace ToysStore.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var toy = await context.toys.FirstOrDefaultAsync(x => x.Id == id);
+            var toy = await context.Toys.FirstOrDefaultAsync(x => x.Id == id);
 
             if (toy == null)
             {

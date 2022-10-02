@@ -17,4 +17,3 @@ export interface brandToyDTO {
   name: string;
   image: string;
 }
-

@@ -9,6 +9,7 @@ export default function FormGroupText(props: formGroupTextProps) {
         name={props.field}
         className="form-control"
         placeholder={props.placeholder}
+        type={props.type}
       />
       <ErrorMessage name={props.field}>
         {(message) => <ShowErrorField message={message} />}
@@ -21,4 +22,9 @@ interface formGroupTextProps {
   field: string;
   label?: string;
   placeholder?: string;
+  type: 'text' | 'password';
+}
+
+FormGroupText.defaultProps = {
+  type: 'text'
 }

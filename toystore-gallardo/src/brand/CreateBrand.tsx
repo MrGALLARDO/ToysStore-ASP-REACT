@@ -8,7 +8,6 @@ import { brandCreationDTO } from "./brands.model";
 import FormBrand from "./FormBrand";
 
 export default function CreateBrand() {
-
   const navigate = useNavigate();
   const [errors, setErrors] = useState<string[]>([]);
 
@@ -16,10 +15,10 @@ export default function CreateBrand() {
     try {
       const formData = convertBrandToFormData(brand);
       await axios({
-        method: 'post',
+        method: "post",
         url: urlBrands,
         data: formData,
-        headers:{'Content-Type': 'multipart/form-data'}
+        headers: { "Content-Type": "multipart/form-data" },
       });
 
       navigate("/brand");
@@ -27,11 +26,11 @@ export default function CreateBrand() {
       setErrors(error.response.data);
     }
   }
-  
+
   return (
     <>
       <h3>Crear Marca</h3>
-      <ShowErrors errors={errors}/>
+      <ShowErrors errors={errors} />
       <FormBrand
         model={{ name: "" }}
         onSubmit={async (values) => {

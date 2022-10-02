@@ -26,6 +26,9 @@ export function convertToyToFormData(toy: toyCreationDTO): FormData {
         formData.append('description', toy.description);
     }
 
+    
+    formData.append('review', toy.review);
+
     formData.append('price',String(toy.price));
 
     formData.append('inStock', String(toy.inStock));

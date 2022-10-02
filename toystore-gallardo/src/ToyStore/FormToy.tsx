@@ -85,7 +85,7 @@ export default function FormToys(props: FormToyProps) {
           <FormGroupCheckbox label="En sucursal" field="inStock" />
           <FormGroupText label="Descripción" field={"description"} />
           <FormGroupNumber label="Precio:" field={"price"} />
-          <FormGroupDate label="Fecha Lanzamiento" field="CoomingSoonDate" />
+          <FormGroupDate label="Fecha Lanzamiento" field="coomingSoonDate" />
           
           <FormGroupText label="Review" field={"review"} />
           <FormGroupImage

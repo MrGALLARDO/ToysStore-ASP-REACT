@@ -28,23 +28,24 @@ namespace ToysStore.Controllers
         [HttpGet]
         public async Task<ActionResult<List<CategoryDTO>>> Get([FromQuery] PaginationDTO paginationDTO)
         {
-            var queryable = context.categories.AsQueryable();
+            var queryable = context.Categories.AsQueryable();
             await HttpContext.InsertParameterPaginationInHeader(queryable);
             var categories = await queryable.OrderBy(x => x.Name).Paginate(paginationDTO).ToListAsync();
-            return mapper.Map<List<CategoryDTO>>(categories);
+            var rt = mapper.Map<List<CategoryDTO>>(categories);
+            return rt;
         }
 
         [HttpGet("all")]
         public async Task<List<CategoryDTO>> All()
         {
-            var categories = await context.categories.ToListAsync();
+            var categories = await context.Categories.ToListAsync();
             return mapper.Map<List<CategoryDTO>>(categories);
         }
 
         [HttpGet("{Id:int}")]
         public async Task<ActionResult<CategoryDTO>> Get(int Id)
         {
-            var category = await context.categories.FirstOrDefaultAsync(x => x.Id == Id);
+            var category = await context.Categories.FirstOrDefaultAsync(x => x.Id == Id);
 
             if (category == null)
             {
@@ -66,7 +67,7 @@ namespace ToysStore.Controllers
         [HttpPut("{id:int}")]
         public async Task<ActionResult> Put(int id, [FromBody] CategoryCreationDTO categoryCreationDTO)
         {
-            var category = await context.categories.FirstOrDefaultAsync(x => x.Id == id);
+            var category = await context.Categories.FirstOrDefaultAsync(x => x.Id == id);
 
             if (category == null)
             {
@@ -83,7 +84,7 @@ namespace ToysStore.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var exist = await context.categories.AnyAsync(x => x.Id == id);
+            var exist = await context.Categories.AnyAsync(x => x.Id == id);
 
             if (!exist)
             {

@@ -5,7 +5,7 @@ import FormGroupText from "../utils/FormGroupText";
 import Button from "../utils/Buttons";
 import { Link } from "react-router-dom";
 import FormGroupsImage from "../utils/FormGroupImage";
-import FormGroupMarkdown from '../utils/FormGroupMarkdown';
+import FormGroupMarkdown from "../utils/FormGroupMarkdown";
 
 export default function FormBrand(props: formBrandProps) {
   const schemeBrand = Yup.object().shape({
@@ -13,7 +13,7 @@ export default function FormBrand(props: formBrandProps) {
       .min(3, "El nombre de la marca debe de tener más de 2 caracteres.")
       .max(50, "El nombre de la marca debe de tener menos de 50 caracteres.")
       .required("El nombre de la marca es requerido.")
-      .firstCapitalLetter()
+      .firstCapitalLetter(),
   });
 
   return (
@@ -29,12 +29,13 @@ export default function FormBrand(props: formBrandProps) {
             label="Nombre de la Marca"
             placeholder="Nombre de la marca"
           />
-          <FormGroupsImage field="image" label="Imagen" imageLink={props.model.imageLink} />
+          <FormGroupsImage
+            field="image"
+            label="Imagen"
+            imageLink={props.model.imageLink}
+          />
           <FormGroupMarkdown field="biography" label="Biografía" />
-          <Button
-            disabled={isSubmitting}
-            type="submit"
-          >
+          <Button disabled={isSubmitting} type="submit">
             Guardar
           </Button>
           <Link className="btn btn-secondary" to="/brand">

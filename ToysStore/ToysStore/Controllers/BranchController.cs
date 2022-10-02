@@ -24,7 +24,7 @@ namespace ToysStore.Controllers
         [HttpGet]
         public async Task<ActionResult<List<BranchDTO>>> Get([FromQuery] PaginationDTO paginationDTO)
         {
-            var queryable = context.branches.AsQueryable();
+            var queryable = context.Branches.AsQueryable();
             await HttpContext.InsertParameterPaginationInHeader(queryable);
             var branches = await queryable.OrderBy(x => x.Name).Paginate(paginationDTO).ToListAsync();
             return mapper.Map<List<BranchDTO>>(branches);
@@ -33,7 +33,7 @@ namespace ToysStore.Controllers
         [HttpGet("{Id:int}")]
         public async Task<ActionResult<BranchDTO>> Get(int Id)
         {
-            var branches = await context.branches.FirstOrDefaultAsync(x => x.Id == Id);
+            var branches = await context.Branches.FirstOrDefaultAsync(x => x.Id == Id);
 
             if (branches == null)
             {
@@ -55,7 +55,7 @@ namespace ToysStore.Controllers
         [HttpPut("{id:int}")]
         public async Task<ActionResult> Put(int Id, [FromBody] BranchCreationDTO branchCreationDTO)
         {
-            var branch = await context.branches.FirstOrDefaultAsync(x => x.Id == Id);
+            var branch = await context.Branches.FirstOrDefaultAsync(x => x.Id == Id);
 
             if (branch == null)
             {
@@ -72,7 +72,7 @@ namespace ToysStore.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var exist = await context.branches.AnyAsync(x => x.Id == id);
+            var exist = await context.Branches.AnyAsync(x => x.Id == id);
 
             if (!exist)
             {

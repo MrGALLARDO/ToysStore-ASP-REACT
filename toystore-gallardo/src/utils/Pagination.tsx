@@ -5,15 +5,14 @@ export default function Pagination(props: paginationProps) {
     const [listLinks, setListLinks] = useState<modelLink[]>([]);
 
     useEffect(() => {
-        
-        const previousPageEnabled = props.currentPage !== 1;
-        const previousPage = props.currentPage - 1;
+        const lastPageEnabled = props.currentPage !== 1;
+        const lastPage = props.currentPage - 1;
         const links: modelLink[] = [];
 
         links.push({
             text: 'Anterior',
-            enabled: previousPageEnabled,
-            page: previousPage,
+            enabled: lastPageEnabled,
+            page: lastPage,
             active: false
         });
 
@@ -22,8 +21,7 @@ export default function Pagination(props: paginationProps) {
                 links.push({
                     text: `${i}`,
                     active: props.currentPage === i,
-                    enabled: true, 
-                    page: i
+                    enabled: true, page: i
                 })
             }
         }
@@ -66,19 +64,16 @@ export default function Pagination(props: paginationProps) {
 
     return (
         <nav>
-      <ul className="pagination justify-content-center">
-        {listLinks.map((link) => (
-          <li
-            key={link.text}
-            onClick={() => selectPage(link)}
-            className={`page-item cursor ${obtainClass(link)}`}
-          >
-            <span className="page-link">{link.text}</span>
-          </li>
-        ))}
-      </ul>
-    </nav>
-    );
+            <ul className="pagination justify-content-center">
+                {listLinks.map(link => <li key={link.text}
+                 onClick={() => selectPage(link)}
+                 className={`page-item cursor ${obtainClass(link)}`}
+                >
+                    <span className="page-link">{link.text}</span>
+                </li>)}
+            </ul>
+        </nav>
+    )
 }
 
 interface modelLink {
@@ -92,7 +87,7 @@ interface paginationProps {
     currentPage: number;
     quantityTotalPages: number;
     radio: number;
-    onChange(pagina: number): void;
+    onChange(page: number): void;
 }
 
 Pagination.defaultProps = {

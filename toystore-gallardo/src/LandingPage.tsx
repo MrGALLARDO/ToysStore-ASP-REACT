@@ -21,11 +21,11 @@ export default function LandingPage() {
   return (
     <>
       <AlertContext.Provider value={() => LoadData()}>
-        <h3>En Cartelera</h3>
+        <h3>Juguetes disponibles</h3>
         <ListToys toys={toys.inStock} />
 
-        <h3>Próximos Estrenos</h3>
-        <ListToys toys={toys.nextToys} />
+        <h3>Próximos Juguetes</h3>
+        <ListToys toys={toys.comingSoonToys} />
       </AlertContext.Provider>
     </>
   );

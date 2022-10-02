@@ -27,7 +27,7 @@ namespace ToysStore.Controllers
         [HttpGet]
         public async Task<ActionResult<List<BrandDTO>>> Get([FromQuery] PaginationDTO paginationDTO)
         {
-            var queryable = context.brands.AsQueryable();
+            var queryable = context.Brands.AsQueryable();
             await HttpContext.InsertParameterPaginationInHeader(queryable);
             var brands = await queryable.OrderBy(x => x.Name).Paginate(paginationDTO).ToListAsync();
             return mapper.Map<List<BrandDTO>>(brands);
@@ -38,7 +38,7 @@ namespace ToysStore.Controllers
         {
             if (string.IsNullOrWhiteSpace(name)) { return new List<ToyBrandDTO>(); }
 
-            return await context.brands
+            return await context.Brands
                 .Where(x => x.Name.Contains(name))
                 .OrderBy(x => x.Name)
                 .Select(x => new ToyBrandDTO { Id = x.Id, Name = x.Name, Image = x.Image })
@@ -49,7 +49,7 @@ namespace ToysStore.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<BrandDTO>> Get(int id)
         {
-            var brand = await context.brands.FirstOrDefaultAsync(x => x.Id == id);
+            var brand = await context.Brands.FirstOrDefaultAsync(x => x.Id == id);
 
             if (brand == null)
             {
@@ -77,7 +77,7 @@ namespace ToysStore.Controllers
         [HttpPut("{id:int}")]
         public async Task<ActionResult> Put(int id, [FromForm] BrandCreationDTO brandCreationDTO)
         {
-            var brand = await context.brands.FirstOrDefaultAsync(x => x.Id == id);
+            var brand = await context.Brands.FirstOrDefaultAsync(x => x.Id == id);
 
             if (brand == null)
             {
@@ -99,7 +99,7 @@ namespace ToysStore.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var brand = await context.brands.FirstOrDefaultAsync(x => x.Id == id);
+            var brand = await context.Brands.FirstOrDefaultAsync(x => x.Id == id);
 
             if (brand == null)
             {
