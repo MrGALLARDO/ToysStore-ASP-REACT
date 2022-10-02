@@ -14,5 +14,8 @@
         public List<CategoryDTO> Categories { get; set; }
         public List<ToyBrandDTO> Brands { get; set; }
         public List<BranchDTO> Branches { get; set; }
+        public int UserVote { get; set; }
+        public double AverageVote { get; set; }
+
     }
 }

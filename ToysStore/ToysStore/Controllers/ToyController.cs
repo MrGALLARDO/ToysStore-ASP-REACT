@@ -58,7 +58,7 @@ namespace ToysStore.Controllers
         public async Task<ActionResult<ToyDTO>> Get(int id)
         {
             Toy toy = await context.Toys
-            .Include(x => x.ToysCategories).ThenInclude(x => x.category)
+            .Include(x => x.ToysCategories).ThenInclude(x => x.Category)
             .Include(x => x.ToysBrands).ThenInclude(x => x.Brand)
             .Include(x => x.ToysBranches).ThenInclude(x => x.Branch)
             .FirstOrDefaultAsync(x => x.Id == id);

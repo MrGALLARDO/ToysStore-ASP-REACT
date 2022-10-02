@@ -9,6 +9,6 @@ namespace ToysStore.Entities
 
         public Toy Toy { get; set; }
 
-        public Category category { get; set; }
+        public Category Category { get; set; }
     }
 }

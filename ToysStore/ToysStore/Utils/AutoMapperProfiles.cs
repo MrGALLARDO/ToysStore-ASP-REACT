@@ -47,8 +47,8 @@ namespace ToysStore.Utils
                 {
                     result.Add(new CategoryDTO()
                     {
-                        Id = categoryToy.ToyId,
-                        Name = categoryToy.category.Name
+                        Id = categoryToy.CategoryId,
+                        Name = categoryToy.Category.Name
                     });
                 }
             }
@@ -66,7 +66,7 @@ namespace ToysStore.Utils
                 {
                     result.Add(new ToyBrandDTO()
                     {
-                        Id = brandToy.ToyId,
+                        Id = brandToy.BrandId,
                         Name = brandToy.Brand.Name,
                         Image = brandToy.Brand.Image,
                         Order = brandToy.Order
@@ -87,7 +87,7 @@ namespace ToysStore.Utils
                 {
                     result.Add(new BranchDTO()
                     {
-                        Id = branchToy.ToyId,
+                        Id = branchToy.BranchId,
                         Name = branchToy.Branch.Name,
                         Latitude = branchToy.Branch.Ubication.Y,
                         Longitude = branchToy.Branch.Ubication.X

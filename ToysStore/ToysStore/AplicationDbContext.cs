@@ -36,5 +36,7 @@ namespace ToysStore
         public DbSet<ToysCategories> Toyscategories { get; set; }
 
         public DbSet<ToysBranches> Toysbranches { get; set; }
+
+        public DbSet<Rating> Ratings { get; set; }
     }
 }
