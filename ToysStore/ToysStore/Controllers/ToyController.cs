@@ -12,12 +12,12 @@ namespace ToysStore.Controllers
     [Route("api/toy")]
     public class ToyController : ControllerBase
     {
-        private readonly AplicationDbContext context;
+        private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
         private readonly IStorageFiles storageFiles;
         private readonly string container = "toys";
 
-        public ToyController(AplicationDbContext context,
+        public ToyController(ApplicationDbContext context,
            IMapper mapper,
            IStorageFiles storageFiles)
         {

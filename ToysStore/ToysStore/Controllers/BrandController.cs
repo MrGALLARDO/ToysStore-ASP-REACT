@@ -11,12 +11,12 @@ namespace ToysStore.Controllers
     [ApiController]
     public class BrandController : ControllerBase
     {
-        private readonly AplicationDbContext context;
+        private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
         private readonly IStorageFiles storageFiles;
         private readonly string container = "brands";
 
-        public BrandController(AplicationDbContext context
+        public BrandController(ApplicationDbContext context
             , IMapper mapper, IStorageFiles storageFiles)
         {
             this.context = context;

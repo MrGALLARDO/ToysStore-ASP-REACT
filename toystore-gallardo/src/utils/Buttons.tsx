@@ -20,12 +20,12 @@ interface buttonProps {
   type: "button" | "submit";
   disabled: boolean;
   className: string;
-  style: CSSProperties
+  style: CSSProperties;
 }
 
 Button.defaultProps = {
   type: "button",
   disabled: false,
   className: "btn btn-primary",
-  style: null
+  style: null,
 };

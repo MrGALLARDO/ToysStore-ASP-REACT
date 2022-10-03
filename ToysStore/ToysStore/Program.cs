@@ -1,9 +1,13 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NetTopologySuite;
 using NetTopologySuite.Geometries;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 using ToysStore;
 using ToysStore.ApiBehavior;
 using ToysStore.Controllers.Filters;
@@ -11,10 +15,12 @@ using ToysStore.Filters;
 using ToysStore.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+var Configuration = builder.Configuration;
+
 
 // Add services to the container.
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
 builder.Services.AddResponseCaching();
 builder.Services.AddControllers(options =>
 {
@@ -35,7 +41,7 @@ builder.Services.AddSingleton<GeometryFactory>(NtsGeometryServices.Instance.Crea
 
 builder.Services.AddTransient<IStorageFiles, StorageAzure>();
 
-builder.Services.AddDbContext<AplicationDbContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
  options.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnection"),
  sqlServer => sqlServer.UseNetTopologySuite()));
 
@@ -48,6 +54,35 @@ builder.Services.AddCors(options =>
         .WithExposedHeaders(new string[] { "quantityTotalRegisters" });
     });
 });
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(opciones =>
+    opciones.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(Configuration["llavejwt"])),
+        ClockSkew = TimeSpan.Zero
+    });
+
+builder.Services.AddAuthorization(opciones =>
+{
+    opciones.AddPolicy("IsAdmin", policy => policy.RequireClaim("role", "admin"));
+});
+
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add(typeof(FilterException));
+    options.Filters.Add(typeof(ParseBadRequest));
+}).ConfigureApiBehaviorOptions(BehaviorBadRequest.Parsing);
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -68,6 +103,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
+
 app.UseRouting();
 
 app.UseCors();
@@ -77,5 +114,10 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 app.Run();

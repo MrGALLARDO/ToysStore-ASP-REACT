@@ -1,12 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ToysStore.Controllers.Entities;
 using ToysStore.Entities;
 
 namespace ToysStore
 {
-    public class AplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
-        public AplicationDbContext(DbContextOptions options) : base(options)
+        public ApplicationDbContext(DbContextOptions options) : base(options)
         {
         }
 

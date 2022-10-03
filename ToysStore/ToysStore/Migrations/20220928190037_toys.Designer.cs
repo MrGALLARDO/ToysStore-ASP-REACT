@@ -12,7 +12,7 @@ using ToysStore;
 
 namespace ToysStore.Migrations
 {
-    [DbContext(typeof(AplicationDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20220928190037_toys")]
     partial class toys
     {

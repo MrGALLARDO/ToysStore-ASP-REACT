@@ -15,7 +15,7 @@ export default function EditCategory() {
           <FormCategory
             model={entity}
             onSubmit={async (values) => {
-              await edit(values);
+              edit(values);
             }}
           />
         )}

@@ -11,7 +11,7 @@ export default function IndexBrand() {
         title="Marcas"
         nameEntity="marca"
       >
-        {(brands, buttons) => 
+        {(brands, buttons) => (
           <>
             <thead>
               <tr>
@@ -28,7 +28,7 @@ export default function IndexBrand() {
               ))}
             </tbody>
           </>
-        }
+        )}
       </IndexEntity>
     </>
   );

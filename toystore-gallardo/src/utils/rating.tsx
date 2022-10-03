@@ -18,14 +18,14 @@ export default function Rating(props: ratingProps) {
         setValueSelected(vote);
     }
 
-    function manageClick(voto: number){
+    function manageClick(vote: number){
         if (claims.length === 0){
             Swal.fire({title: "Error", text:'Debes loguearte para votar', icon: 'error'});
             return;
         }
 
-        setValueSelected(voto);
-        props.onChange(voto);
+        setValueSelected(vote);
+        props.onChange(vote);
     }
 
     return (

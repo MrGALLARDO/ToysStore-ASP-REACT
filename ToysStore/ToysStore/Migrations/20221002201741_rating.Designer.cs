@@ -12,7 +12,7 @@ using ToysStore;
 
 namespace ToysStore.Migrations
 {
-    [DbContext(typeof(AplicationDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20221002201741_rating")]
     partial class rating
     {

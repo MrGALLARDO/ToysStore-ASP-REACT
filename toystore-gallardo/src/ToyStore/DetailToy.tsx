@@ -2,11 +2,14 @@ import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Link, useParams } from "react-router-dom";
-import { urlToys } from "../utils/endpoints";
+import { urlRatings, urlToys } from "../utils/endpoints";
 import { coordinateDTO } from "../utils/coordinates.model";
 import Loading from "../utils/Loading";
 import MapLeaflet from "../utils/Map";
 import { toyDTO } from "./toys.models";
+import Swal from "sweetalert2";
+import Rating from "../utils/Rating";
+
 
 export default function DetallePelicula() {
   const { id }: any = useParams();
@@ -48,6 +51,11 @@ export default function DetallePelicula() {
     return `https://www.youtube.com/embed/${videoId}`;
   }
 
+  async function onVote(vote: number){
+    await axios.post(urlRatings, {punctuation: vote, toyId: id})
+    Swal.fire({icon: 'success', title: 'Voto recibido'});
+ }
+
   return toy ? (
     <div style={{ display: "flex" }}>
       <div>
@@ -65,6 +73,12 @@ export default function DetallePelicula() {
           </Link>
         ))}
         | {toy.comingSoonDate.toDateString()}
+        | Valoraciones: 
+        <Rating maxValue={5}
+        valueSelected={toy.voteUser!}
+        onChange={onVote}
+        />
+        
         <div style={{ display: "flex", marginTop: "1rem" }}>
           <span style={{ display: "inline-block", marginRight: "1rem" }}>
             <img

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
@@ -21,6 +22,13 @@ namespace ToysStore.Filters
                 if (answerCurrent.Value is string)
                 {
                     answer.Add(answerCurrent.Value.ToString());
+                }
+                else if (answerCurrent.Value is IEnumerable<IdentityError> errores)
+                {
+                    foreach (var error in errores)
+                    {
+                        answer.Add(error.Description);
+                    }
                 }
                 else
                 {

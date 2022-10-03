@@ -14,11 +14,11 @@ namespace ToysStore.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ILogger<CategoryController> logger;
-        private readonly AplicationDbContext context;
+        private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
 
         public CategoryController(ILogger<CategoryController> logger,
-            AplicationDbContext context,
+            ApplicationDbContext context,
             IMapper mapper)
         {
             this.logger = logger;
