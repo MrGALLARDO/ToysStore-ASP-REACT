@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using NetTopologySuite.Geometries;
 using ToysStore.Controllers.Entities;
 using ToysStore.DTOs;
@@ -35,6 +36,8 @@ namespace ToysStore.Utils
                .ForMember(x => x.Categories, options => options.MapFrom(MappedToysDTOCategories))
                .ForMember(x => x.Brands, options => options.MapFrom(MappedToysDTOBrands))
                .ForMember(x => x.Branches, options => options.MapFrom(MappedToysDTOBranches));
+
+            CreateMap<IdentityUser, UserDTO>();
         }
 
         private List<CategoryDTO> MappedToysDTOCategories(Toy toy, ToyDTO toyDTO)

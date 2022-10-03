@@ -8,11 +8,11 @@ import { userDTO } from "./auth.model";
 
 export default function IndexUsers() {
   async function makeAdmin(id: string) {
-    await editAdmin(`${urlAccounts}/makeAdmin`, id);
+    await editAdmin(`${urlAccounts}/MakeAdmin`, id);
   }
 
   async function removeAdmin(id: string) {
-    await editAdmin(`${urlAccounts}/removeAdmin`, id);
+    await editAdmin(`${urlAccounts}/RemoveAdmin`, id);
   }
 
   async function editAdmin(url: string, id: string) {

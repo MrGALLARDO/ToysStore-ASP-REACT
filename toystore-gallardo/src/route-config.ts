@@ -40,7 +40,7 @@ const routes = [
 
     {path:'/register', element :  Register},
     {path:'/login', element : Login},
-    {path:'/user', element : IndexUsers, isAdmin: true},
+    {path:'/users', element : IndexUsers, isAdmin: true},
 
     {path:'/', element: LandingPage},
     {path:'*', element : RedirectLanding},

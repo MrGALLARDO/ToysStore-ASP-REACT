@@ -73,6 +73,7 @@ export default function DetallePelicula() {
           </Link>
         ))}
         | {toy.comingSoonDate.toDateString()}
+        | {toy.averageVote!}
         | Valoraciones: 
         <Rating maxValue={5}
         valueSelected={toy.voteUser!}
